@@ -1,3 +1,4 @@
 {
-    "mongoURI":"mongodb+srv://eli123:eli123@cluster0.x0eya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongoURI":"mongodb+srv://eli123:eli123@cluster0.x0eya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret":"somestuff"
 }
