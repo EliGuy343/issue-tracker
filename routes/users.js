@@ -49,7 +49,8 @@ router.post('/',[
 
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                name:user.name
             }
         }
         
@@ -106,7 +107,8 @@ router.post('/admin',[
 
         const payload = {
             user: {
-                id: user.id
+                id: user.id,
+                name:user.name
             }
         }
         

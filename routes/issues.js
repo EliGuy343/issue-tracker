@@ -7,6 +7,7 @@ const Issue = require('../models/Issue');
 
 
 
+
 const router = express.Router();
 
 //@route      GET  api/issues
@@ -33,8 +34,36 @@ router.get('/', auth ,async (req, res) => {
 //@access     private
 
 
-router.post('/', (req, res) => {
-    res.send('issue added');
+router.post('/',[auth,[
+    check('name', 'name is required').not().isEmpty(),
+    check('category', 'category is required').not().isEmpty()
+]], async (req, res) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array()});
+    }
+
+    const {name, category } = req.body; 
+    try {
+        const newIssue = new Issue({
+            name,
+            category,
+            solved:false,
+            date:Date.now(),
+            user: req.user.id,
+            solution:'',
+            userName: req.user.user   
+        });
+    
+        const issue = await newIssue.save(); 
+        res.json(issue);
+        
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error");
+
+    }
+
 })
 
 

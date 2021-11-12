@@ -5,6 +5,10 @@ const IssueSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
+    userName:{
+        type:String,
+        ref:'users'
+    },
     name: {
         type:String,
         required: true
@@ -13,6 +17,10 @@ const IssueSchema = mongoose.Schema({
         type:Boolean,
         required:true,
         default:false
+    },
+    Solution: {
+        type:String,
+        defalut:''
     },
     category: {
         type:String,
