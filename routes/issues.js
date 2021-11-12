@@ -1,4 +1,11 @@
 const express = require('express')
+const auth = require('../middleware/auth');
+const {check, validationResult } = require('express-validator');
+
+const User = require('../models/User');
+const Issue = require('../models/Issue');
+
+
 
 const router = express.Router();
 
@@ -7,8 +14,17 @@ const router = express.Router();
 //@access     public
 
 
-router.get('/', (req, res) => {
-    res.send('get tracked issues');
+router.get('/', auth ,async (req, res) => {
+    try {
+
+        const issues = await Issue.find({user: req.user.id}).sort({date: -1});
+        res.json(issues);
+        
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error"); 
+    }
+
 })
 
 
