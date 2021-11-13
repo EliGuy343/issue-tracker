@@ -43,15 +43,14 @@ router.post('/',[auth,[
         return res.status(400).json({errors: errors.array()});
     }
 
-    const {name, category } = req.body; 
+    const {name, category,type } = req.body; 
     try {
         const newIssue = new Issue({
             name,
             category,
-            solved:false,
+            type,
             date:Date.now(),
             user: req.user.id,
-            solution:'',
             userName: req.user.user   
         });
     
@@ -73,17 +72,71 @@ router.post('/',[auth,[
 //@access     private
 
 
-router.put('/:id', (req, res) => {
-    res.send('Update issue');
-})
+router.put('/:id',auth , async (req, res) => {
+    const {name,category, type} = req.body; 
+
+    // Create contact obj
+
+    const issueFields = {}
+    if(name) issueFields.name = name;
+    if(category) issueFields.category = category;
+    if(type) issueFields.type = type;
+
+    try {
+        let issue = await Issue.findById(req.params.id);
+
+        if(!issue) {
+            return res.status(404).json({msg :'Issue not found'});
+        }
+
+        if(issue.user.toString() !== req.user.id && !req.user.admin) {
+            return res.status(401).json({msg: 'unauthorized Request'});
+        }
+
+        issue = await Issue.findByIdAndUpdate(req.params.id,
+            {$set:issueFields},
+            {new: true});
+
+
+        res.json(issue);
+
+         
+    } catch (error) {
+        console.error(error.message);
+        res.status.send('Server Error');
+    }
+
+
+});
 
 //@route         DELETE  api/issues/:id
 //@desc          delete an issue
 //@access        private
 
 
-router.delete('/:id', (req, res) => {
-    res.send('issue deleted');
+router.delete('/:id',auth, async (req, res) => {
+    try {
+        let issue = await Issue.findById(req.params.id);
+
+        if(!issue) {
+            return res.status(404).json({msg :'Issue not found'});
+        }
+
+        if(issue.user.toString() !== req.user.id && !req.user.admin) {
+            return res.status(401).json({msg: 'unauthorized Request'});
+        }
+
+        issue = await Issue.findByIdAndRemove(req.params.id);
+
+
+        res.json(issue);
+
+         
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+
 })
     
 module.exports = router;

@@ -13,14 +13,9 @@ const IssueSchema = mongoose.Schema({
         type:String,
         required: true
     },
-    solved: {
-        type:Boolean,
-        required:true,
-        default:false
-    },
-    Solution: {
+    type: {
         type:String,
-        defalut:''
+        required:true
     },
     category: {
         type:String,
