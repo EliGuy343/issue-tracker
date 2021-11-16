@@ -21,10 +21,16 @@ router.post('/',[auth,[
     }
     const {issue, solution } = req.body;
 
-    const issueCheck = Fix.findOne({issue:issue}) 
+    const issueForFixCheck = Fix.findOne({issue:issue}) 
+
+    if(issueForFixCheck) {
+        return res.status(400).json({msg:"Fix already exists for this issue"})
+    }
+
+    const issueCheck = Issue.findOne({_id:Issue});
 
     if(issueCheck) {
-        return res.status(400).json({msg:"Fix already exists for this issue"})
+        return res.status(400).json({msg:"Invalid Issue ID"});
     }
 
      
