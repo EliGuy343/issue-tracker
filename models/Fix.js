@@ -13,6 +13,10 @@ const IssueSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'issues'
     },
+    solution: {
+        type:String,
+        required:true
+    },
     date: {
         type: Date, 
         defualt: Date.now
