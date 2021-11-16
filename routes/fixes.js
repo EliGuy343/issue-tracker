@@ -19,25 +19,26 @@ router.post('/',[auth,[
     if(!errors.isEmpty()) {
         return res.status(400).json({errors: errors.array()});
     }
+    const {issue, solution } = req.body;
 
-    const fix = Fix.findOne({issue:req.body.issue}) 
+    const issueCheck = Fix.findOne({issue:issue}) 
 
-    if(fix) {
+    if(issueCheck) {
         return res.status(400).json({msg:"Fix already exists for this issue"})
     }
 
-    const {name, category } = req.body; 
+     
     try {
-        const newIssue = new Issue({
-            name,
-            category,
+        const newFix = new Fix({
+            issue,
+            solution,
             date:Date.now(),
             user: req.user.id,
             userName: req.user.user   
         });
     
-        const issue = await newIssue.save(); 
-        res.json(issue);
+        const fix = await newFix.save(); 
+        res.json(fix);
         
     } catch (error) {
         console.error(error.message);
