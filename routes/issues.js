@@ -11,11 +11,29 @@ const Issue = require('../models/Issue');
 const router = express.Router();
 
 //@route      GET  api/issues
-//@desc       get all tracked issues
+//@desc       get all tracked issues 
+//@access     public
+
+router.get('/', async (req, res) => {
+    try {
+
+        const issues = await Issue.find().sort({date: -1});
+        res.json(issues);
+        
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error"); 
+    }
+
+})
+
+
+//@route      GET  api/issues
+//@desc       get all tracked issues for a specfic user
 //@access     public
 
 
-router.get('/', auth ,async (req, res) => {
+router.get('/user', auth ,async (req, res) => {
     try {
 
         const issues = await Issue.find({user: req.user.id}).sort({date: -1});
@@ -43,12 +61,11 @@ router.post('/',[auth,[
         return res.status(400).json({errors: errors.array()});
     }
 
-    const {name, category,type } = req.body; 
+    const {name, category } = req.body; 
     try {
         const newIssue = new Issue({
             name,
             category,
-            type,
             date:Date.now(),
             user: req.user.id,
             userName: req.user.user   
