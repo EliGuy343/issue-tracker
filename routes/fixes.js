@@ -1,7 +1,7 @@
 const express = require('express')
 const auth = require('../middleware/auth');
 const {check, validationResult } = require('express-validator');
-
+const mongoose = require('mongoose');
 
 
 const router = express.Router();
@@ -18,31 +18,30 @@ const Fix = require('../models/Fix');
 //@access     private
 
 
-router.post('/',[auth,[
-    check('name', 'name is required').not().isEmpty(),
-]], async (req, res) => {
+router.post('/',auth, async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         return res.status(400).json({errors: errors.array()});
     }
     const {issue, solution } = req.body;
 
-    const issueForFixCheck = Fix.findOne({issue:issue}) 
+    const issueForFixCheck = await Fix.findOne({issue}) 
 
     if(issueForFixCheck) {
         return res.status(400).json({msg:"Fix already exists for this issue"})
     }
-
-    const issueCheck = Issue.findOne({_id:Issue});
-
-    if(issueCheck) {
+    
+    const issueCheck = await Issue.findById(issue);    
+    console.log(issueCheck)
+    
+    if(!issueCheck) {
         return res.status(400).json({msg:"Invalid Issue ID"});
     }
 
      
     try {
         const newFix = new Fix({
-            issue,
+            issue:mongoose.Types.ObjectId(issue),
             solution,
             date:Date.now(),
             user: req.user.id,
