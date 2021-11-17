@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const IssueSchema = mongoose.Schema({
+const FixSchema = mongoose.Schema({
     user: {
         type:mongoose.Schema.Types.ObjectId,
         ref: 'users'
@@ -25,4 +25,4 @@ const IssueSchema = mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('issue', IssueSchema);
+module.exports = mongoose.model('fix', FixSchema);
