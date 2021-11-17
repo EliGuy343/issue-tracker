@@ -13,8 +13,8 @@ const Fix = require('../models/Fix');
 
 
 
-//@route      POST api/issues
-//@desc       post an issue
+//@route      POST api/fixes
+//@desc       post a fix
 //@access     private
 
 
