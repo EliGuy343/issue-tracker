@@ -2,9 +2,15 @@ const express = require('express')
 const auth = require('../middleware/auth');
 const {check, validationResult } = require('express-validator');
 
+
+
+const router = express.Router();
+
+
 const User = require('../models/User');
 const Issue = require('../models/Issue');
 const Fix = require('../models/Fix');
+
 
 
 //@route      POST api/issues
@@ -53,3 +59,6 @@ router.post('/',[auth,[
     }
 
 })
+
+
+module.exports = router;
