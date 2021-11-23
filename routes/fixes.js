@@ -12,6 +12,40 @@ const Issue = require('../models/Issue');
 const Fix = require('../models/Fix');
 
 
+//@route      GET  api/fixes
+//@desc       get all fixes
+//@access     public
+
+router.get('/', async (req, res) => {
+    try {
+
+        const fixes = await Fix.find().sort({date: -1});
+        res.json(fixes);
+        
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error"); 
+    }
+
+})
+
+//@route      GET  api/issues
+//@desc       get all fixes of a specfic user
+//@access     public
+
+
+router.get('/user', auth ,async (req, res) => {
+    try {
+
+        const fixes = await Fix.find({user: req.user.id}).sort({date: -1});
+        res.json(fixes);
+        
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error"); 
+    }
+
+})
 
 //@route      POST api/fixes
 //@desc       post a fix
