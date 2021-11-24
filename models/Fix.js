@@ -21,7 +21,7 @@ const FixSchema = mongoose.Schema({
         type: Date, 
         defualt: Date.now
     },
-
+    
 })
 
 

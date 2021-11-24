@@ -7,7 +7,8 @@ const IssueSchema = mongoose.Schema({
     },
     userName:{
         type:String,
-        ref:'users'
+        ref:'users',
+        required:true
     },
     name: {
         type:String,
@@ -21,7 +22,11 @@ const IssueSchema = mongoose.Schema({
         type: Date, 
         defualt: Date.now
     },
-
+    fix :{
+        type:mongoose.Schema.Types.ObjectID,
+        ref:'fixes',
+        default:null
+    }
 })
 
 
