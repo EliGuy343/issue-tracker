@@ -93,5 +93,45 @@ router.post('/',auth, async (req, res) => {
 
 })
 
+//@route      PUT api/fixes/:id
+//@desc       edit a fix
+//@access     private
+
+
+router.put('/:id',auth , async (req, res) => {
+    const {solution} = req.body; 
+
+    // Create contact obj
+
+    const fixFields = {}
+    if(solution) fixFields.solution = solution;
+ 
+
+    try {
+        let fix = await Fix.findById(req.params.id);
+        console.log(req.params.id);
+        if(!fix) {
+            return res.status(404).json({msg :'fix not found'});
+        }
+
+        if(fix.user.toString() !== req.user.id && !req.user.admin) {
+            return res.status(401).json({msg: 'unauthorized Request'});
+        }
+
+        fix = await Fix.findByIdAndUpdate(req.params.id,
+            {$set:fixFields},
+            {new: true});
+
+
+        res.json(fix);
+
+         
+    } catch (error) {
+        console.error(error.message);
+        res.status.send('Server Error');
+    }
+
+
+});
 
 module.exports = router;
