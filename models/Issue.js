@@ -21,11 +21,6 @@ const IssueSchema = mongoose.Schema({
     date: {
         type: Date, 
         defualt: Date.now
-    },
-    fix :{
-        type:mongoose.Schema.Types.ObjectID,
-        ref:'fixes',
-        default:null
     }
 })
 
