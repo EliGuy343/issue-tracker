@@ -29,6 +29,23 @@ router.get('/', async (req, res) => {
 
 })
 
+//@route      GET  api/fixes
+//@desc       get fix for specific issue
+//@access     public
+
+router.get('/issue/:id', async (req, res) => {
+    try {
+
+        const fix = await Fix.findOne({issue: req.params.id})
+        res.json(fix);
+        
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server Error"); 
+    }
+})
+
+
 //@route      GET  api/issues
 //@desc       get all fixes of a specfic user
 //@access     public
