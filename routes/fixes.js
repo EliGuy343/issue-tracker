@@ -151,4 +151,34 @@ router.put('/:id',auth , async (req, res) => {
 
 });
 
+
+//@route         DELETE  api/fixes/:id
+//@desc          delete a fix
+//@access        private
+
+
+router.delete('/:id',auth, async (req, res) => {
+    try {
+        let fix = await Fix.findById(req.params.id);
+
+        if(!fix) {
+            return res.status(404).json({msg :'Fix not found'});
+        }
+
+        if(fix.user.toString() !== req.user.id && !req.user.admin) {
+            return res.status(401).json({msg: 'unauthorized Request'});
+        }
+
+        fix = await Fix.findByIdAndRemove(req.params.id);
+
+
+        res.json(issue);
+
+         
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+
+})
 module.exports = router;
