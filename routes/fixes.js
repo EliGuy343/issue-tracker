@@ -69,7 +69,9 @@ router.get('/user', auth ,async (req, res) => {
 //@access     private
 
 
-router.post('/',auth, async (req, res) => {
+router.post('/',[auth,[
+    check('solution', 'solution is required').not().isEmpty()
+]], async (req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         return res.status(400).json({errors: errors.array()});
