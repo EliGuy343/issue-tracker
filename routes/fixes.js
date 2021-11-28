@@ -11,7 +11,7 @@ const User = require('../models/User');
 const Issue = require('../models/Issue');
 const Fix = require('../models/Fix');
 
-// test
+//test
 
 //@route      GET  api/fixes
 //@desc       get all fixes
