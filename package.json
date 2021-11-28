@@ -6,7 +6,10 @@
   "type": "commonjs",
   "scripts": {
     "test": "node server.js",
-    "server":"nodemon server.js"
+    "server":"nodemon server.js",
+    "client":"npm start --prefix client",
+    "clientinstall":"npm install --prefix client",
+    "dev":"concurrently \" run server \"  \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -22,5 +25,7 @@
   "devDependencies": {
     "concurrently": "^6.3.0",
     "nodemon": "^2.0.14"
-  }
+  },
+  "proxy":"http://localhost:5000"
+
 }
