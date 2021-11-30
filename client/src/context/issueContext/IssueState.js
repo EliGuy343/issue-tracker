@@ -22,7 +22,8 @@ const IssueState = props => {
                 user:'618c0a5a607433ccb320892f',
                 userName:'Jack Dickson',
                 name:`register fails on regular login`,
-                category:"authentication"
+                category:"authentication",
+                date: Date.now
                 
             },
             {
@@ -30,8 +31,8 @@ const IssueState = props => {
                 user:'618c0a5a607433ccb320892f',
                 userName:'Jack Dickson',
                 name:`solution components don't load`,
-                category:"UI"
-                
+                category:"UI",
+                date: Date.now
             }
         ]
     }

@@ -7,25 +7,28 @@ import About from './components/pages/About';
 import AllIssues from './components/pages/AllIssues';
 import MyIssues from './components/pages/MyIssues';
 import IssueState from './context/issueContext/IssueState';
+import FixState from './context/fixContext/FixState';
 
 const App = () => {
   return (
-    <IssueState>
-      <Router>
-      <Fragment className="container">
-        <Navbar />
-          <div>
-            <Routes>
-              <Route exact path='/' element={<Home/>}/>
-              <Route exact path='/about' element={<About/>}/>
-              <Route exact path='/myissues' element={<MyIssues/>}/>
-              <Route exact path='/AllIssues' element={<AllIssues/>}/>
-            </Routes>
-      
-          </div>
-      </Fragment>
-      </Router>
-    </IssueState>
+    <FixState>
+      <IssueState>
+        <Router>
+        <Fragment className="container">
+          <Navbar />
+            <div>
+              <Routes>
+                <Route exact path='/' element={<Home/>}/>
+                <Route exact path='/about' element={<About/>}/>
+                <Route exact path='/myissues' element={<MyIssues/>}/>
+                <Route exact path='/AllIssues' element={<AllIssues/>}/>
+              </Routes>
+        
+            </div>
+        </Fragment>
+        </Router>
+      </IssueState>
+    </FixState>
   );
 }
 
