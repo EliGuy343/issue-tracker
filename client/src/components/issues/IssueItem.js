@@ -11,8 +11,8 @@ const IssueItem = ({issue}) => {
 
    // какого хуй блять???
    // да не, все работает... 
-   
-   // we will need bring in Fixcontext and get check if solution is there... and also use it to add or remove. 
+
+   // we will need bring in fixContext and get check if solution is there... and also use it to add or remove. 
 
     return (
         <div className ="card bg-light">
@@ -28,7 +28,11 @@ const IssueItem = ({issue}) => {
             <h4 className="text-left">
             <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + issueDate}{' '}
             </h4>
-           
+            <div style={{"margin-top":"12px"}}>
+                <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}}>Edit</button>
+                <button className="btn btn-danger btn-sm">Delete</button>
+            </div>
+            <button className="btn btn-primary btn-sm" style={{"margin-top":"6px"}}>Add/View Solution</button>
         </div>
     )
 }
