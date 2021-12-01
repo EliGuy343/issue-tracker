@@ -23,7 +23,7 @@ const IssueState = props => {
                 userName:'Jack Dickson',
                 name:`register fails on regular login`,
                 category:"authentication",
-                date: Date.now
+                date: Date.now()
                 
             },
             {
@@ -32,7 +32,7 @@ const IssueState = props => {
                 userName:'Jack Dickson',
                 name:`solution components don't load`,
                 category:"UI",
-                date: Date.now
+                date: Date.now()
             }
         ]
     }

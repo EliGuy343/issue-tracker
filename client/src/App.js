@@ -23,7 +23,6 @@ const App = () => {
                 <Route exact path='/myissues' element={<MyIssues/>}/>
                 <Route exact path='/AllIssues' element={<AllIssues/>}/>
               </Routes>
-        
             </div>
         </Fragment>
         </Router>
