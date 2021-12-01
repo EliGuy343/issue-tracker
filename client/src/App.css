@@ -7,6 +7,7 @@
   --light-color: #f4f4f4;
   --danger-color: #ff051e;
   --success-color: #02c22f;
+  --menu-color: #034ace;
 }
 
 * {
@@ -399,6 +400,7 @@ table th {
   opacity: 0;
   transition: opacity 1000ms ease-in;
 }
+
 
 /* Mobile Styles */
 @media (max-width: 700px) {
