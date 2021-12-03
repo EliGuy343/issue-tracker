@@ -1,13 +1,14 @@
-import React, {Fragment, useContext} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import issueLogo from '../../icons/issue.png';
 import engineerLogo from '../../icons/engineer.png'
 import categoryLogo from '../../icons/category.png'
 import dateLogo from '../../icons/date.png'
+import SolutionWindow from '../Solution/SolutionWindow';
 const IssueItem = ({issue}) => {
 
     const {userName, name, category, date}  = issue;
     const issueDate = Date(date).toString();
-    
+    const [isOpen, setIsOpen] = useState(false);
 
    // какого хуй блять???
    // да не, все работает... 
@@ -32,7 +33,9 @@ const IssueItem = ({issue}) => {
                 <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}}>Edit</button>
                 <button className="btn btn-danger btn-sm">Delete</button>
             </div>
-            <button className="btn btn-primary btn-sm" style={{"margin-top":"6px"}}>Add/View Solution</button>
+            <button className="btn btn-primary btn-sm" onClick={() => setIsOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
+
+            <SolutionWindow open={isOpen} close={() => setIsOpen(false)} test={"test"}/>
         </div>
     )
 }
