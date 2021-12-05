@@ -8,8 +8,9 @@ const SolutionWindow = ({open,test, close}) => {
         left:'50%',
         transform:'translate(-50%, -50%)',
         background:"#ccc",
-        padding:'50px',
-        zIndex:1000
+        padding:'5px',
+        zIndex:1000,
+        width:"80%"
     }
 
     const  OVERLAY_STYLES = {
@@ -28,15 +29,15 @@ const SolutionWindow = ({open,test, close}) => {
 
     return ReactDom.createPortal(
         <Fragment>
-            <div style= {OVERLAY_STYLES}/>
+            <div style={OVERLAY_STYLES}/>
             <div style={MODAL_STYLES}>    
-                <div className="card bg-light" >
+                <div className="card bg-light">
                     <h3>{"Add a solution"}</h3>
                     <form>
-                    <input type="text" placeholder="Solution" name="solution"></input>
+                    <input type="text" placeholder="Solution" name="solution" style={{"width":"100%"}}></input>
                     <input type ='submit' value={"Submit"} className="btn btn-primary btn-block" ></input>
                     </form>
-                    <button className="btn btn-primary btn-sm" onClick={close} style={{"margin-top":"6px"}}>close</button>
+                    <button className="btn btn-danger btn-sm" onClick={close} style={{"margin-top":"6px", "font-size":"16px"}}>close</button>
                 </div>
             </div>
         </Fragment>,
