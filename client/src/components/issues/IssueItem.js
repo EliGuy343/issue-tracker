@@ -40,4 +40,4 @@ const IssueItem = ({issue, isAllIssues}) => {
     )
 }
 
-export default IssueItem
+export default IssueItem;
