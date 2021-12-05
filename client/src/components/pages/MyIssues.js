@@ -5,7 +5,7 @@ const MyIssues = () => {
         <div className="grid-2">
             <div>{/*some stuff here*/}</div>
             <div>
-                <Issues/>
+                <Issues isAllIssues={false}/>
             </div>
         </div>
     )

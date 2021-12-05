@@ -3,7 +3,7 @@ import Issues from '../issues/Issues'
 const AllIssues = () => {
     return (
         <div>
-              <Issues/>
+              <Issues isAllIssues={true}/>
         </div>
     )
 }

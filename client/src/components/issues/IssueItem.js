@@ -4,7 +4,7 @@ import engineerLogo from '../../icons/engineer.png'
 import categoryLogo from '../../icons/category.png'
 import dateLogo from '../../icons/date.png'
 import SolutionWindow from '../Solution/SolutionWindow';
-const IssueItem = ({issue}) => {
+const IssueItem = ({issue, isAllIssues}) => {
 
     const {userName, name, category, date}  = issue;
     const issueDate = Date(date).toString();
@@ -20,9 +20,9 @@ const IssueItem = ({issue}) => {
             <h4 className="text-left">
             <img src={issueLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Issue: " + name}{' '}
             </h4>
-            <h4 className="text-left">
+            {isAllIssues ? <h4 className="text-left">
             <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Submitted By: " + userName}{' '}
-            </h4>
+            </h4> : null}
             <h4 className="text-left">
             <img src={categoryLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Category: " + category}{' '}
             </h4>
