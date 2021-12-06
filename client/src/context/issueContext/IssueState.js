@@ -37,12 +37,18 @@ const IssueState = props => {
         ]
     }
 
+    const addIssue = issue => {
+        issue.id = uuidv4(); 
+        dispatch({ type: ADD_ISSUE, payload: issue});
+    }
+
     const [state, dispatch] = useReducer(issueReducer, initialState); 
 
     return (
         <issueContext.Provider
         value={{
-            issues: state.issues
+            issues: state.issues,
+            addIssue
         }}>
             {props.children}
         </issueContext.Provider>
