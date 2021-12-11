@@ -26,12 +26,17 @@ const FixState = props => {
             
         }
     }
-
+    const addFix = ({fix, solutionId}) => {
+        fix.id = uuidv4(); 
+        const newFix = [solutionId,fix];
+        dispatch({type: ADD_FIX, payload: newFix});
+    }
     const [state, dispatch] = useReducer(fixReducer, initialState);
 
     return (
         <fixContext.Provider value={{
-            fixes: state.fixes
+            fixes: state.fixes,
+            addFix
         }}>
             {props.children}
         </fixContext.Provider>
