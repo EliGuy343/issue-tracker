@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import ReactDom from 'react-dom'
-const SolutionWindow = ({open,test, close}) => {
+const SolutionWindow = ({open, close}) => {
 
     const MODAL_STYLES = {
         position:'fixed',

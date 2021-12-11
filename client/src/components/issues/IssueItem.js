@@ -35,7 +35,7 @@ const IssueItem = ({issue, isAllIssues}) => {
             </div>
             <button className="btn btn-primary btn-sm" onClick={() => setIsOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
 
-            <SolutionWindow open={isOpen} close={() => setIsOpen(false)} test={"test"}/>
+            <SolutionWindow open={isOpen} close={() => setIsOpen(false)}/>
         </div>
     )
 }
