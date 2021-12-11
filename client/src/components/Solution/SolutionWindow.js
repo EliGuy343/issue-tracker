@@ -56,10 +56,10 @@ const SolutionWindow = ({open, close, issueId}) => {
                             <input type="text" placeholder={"Enter new Solution"} name="newSolution" style={{"width":"100%"}}></input>
                             <input type ='submit' value={"Submit new Solution"} className="btn btn-primary btn-block" ></input>
                     </form>
-                        <div style={{"margin-top":"12px"}}>
-                            <button className="btn btn-danger btn-sm">Delete</button>
+                        <div>
+                            <button className="btn btn-danger btn-sm" style={{"font-size":"16px", "width":"100%"}}>Delete</button>
                         </div>
-                        <button className="btn btn-danger btn-sm" onClick={close} style={{"margin-top":"6px", "font-size":"16px"}}>close</button>
+                        <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"12px", "font-size":"16px"}}>close</button>
                     </div>
                 </div>
             </Fragment>,
@@ -79,7 +79,7 @@ const SolutionWindow = ({open, close, issueId}) => {
                     <input type="text" placeholder="Solution" name="solution" style={{"width":"100%"}}></input>
                     <input type ='submit' value={"Submit"} className="btn btn-primary btn-block" ></input>
                     </form>
-                    <button className="btn btn-danger btn-sm" onClick={close} style={{"margin-top":"6px", "font-size":"16px"}}>close</button>
+                    <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"6px", "font-size":"16px"}}>close</button>
                 </div>
             </div>
         </Fragment>,
