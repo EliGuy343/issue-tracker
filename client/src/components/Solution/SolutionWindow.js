@@ -1,7 +1,13 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useContext} from 'react'
 import ReactDom from 'react-dom'
-const SolutionWindow = ({open, close}) => {
+import FixContext from '../../context/fixContext/fixContext'
+import issueLogo from '../../icons/issue.png';
+import engineerLogo from '../../icons/engineer.png'
+import dateLogo from '../../icons/date.png'
+const SolutionWindow = ({open, close, issueId}) => {
 
+    const fixContext = useContext(FixContext); 
+    const {fixes} = fixContext; 
     const MODAL_STYLES = {
         position:'fixed',
         top:'50%',
@@ -26,6 +32,42 @@ const SolutionWindow = ({open, close}) => {
 
         return null;
     }
+   
+    
+    if(issueId in fixes) {
+        const {userName, solution, date} = fixes[issueId]; 
+        const solutionDate = Date(date).toString();
+        return ReactDom.createPortal(
+            <Fragment>
+                <div style={OVERLAY_STYLES}/>
+                <div style={MODAL_STYLES}>
+                    <div className ="card bg-light">    
+                        <h4 className="text-left">
+                            <img src={issueLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Solution: " + solution}{' '}
+                        </h4>
+                        <h4 className="text-left">
+                            <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Submitted By: " + userName}{' '}
+                        </h4>
+                        <h4 className="text-left">
+                            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + solutionDate}{' '}
+                        </h4>
+                        <h3 style={{"margin-top":"15px"}} >Edit Solution:</h3>
+                        <form>
+                            <input type="text" placeholder={"Enter new Solution"} name="newSolution" style={{"width":"100%"}}></input>
+                            <input type ='submit' value={"Submit new Solution"} className="btn btn-primary btn-block" ></input>
+                    </form>
+                        <div style={{"margin-top":"12px"}}>
+                            <button className="btn btn-danger btn-sm">Delete</button>
+                        </div>
+                        <button className="btn btn-danger btn-sm" onClick={close} style={{"margin-top":"6px", "font-size":"16px"}}>close</button>
+                    </div>
+                </div>
+            </Fragment>,
+            document.getElementById('portal')
+        )
+    
+
+    }else {
 
     return ReactDom.createPortal(
         <Fragment>
@@ -43,6 +85,7 @@ const SolutionWindow = ({open, close}) => {
         </Fragment>,
         document.getElementById('portal')
     )
+}
 }
 
 export default SolutionWindow

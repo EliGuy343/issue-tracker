@@ -6,7 +6,7 @@ import dateLogo from '../../icons/date.png'
 import SolutionWindow from '../Solution/SolutionWindow';
 const IssueItem = ({issue, isAllIssues}) => {
 
-    const {userName, name, category, date}  = issue;
+    const {id,userName, name, category, date}  = issue;
     const issueDate = Date(date).toString();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -35,7 +35,7 @@ const IssueItem = ({issue, isAllIssues}) => {
             </div>
             <button className="btn btn-primary btn-sm" onClick={() => setIsOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
 
-            <SolutionWindow open={isOpen} close={() => setIsOpen(false)}/>
+            <SolutionWindow open={isOpen} close={() => setIsOpen(false)} issueId={id}/>
         </div>
     )
 }

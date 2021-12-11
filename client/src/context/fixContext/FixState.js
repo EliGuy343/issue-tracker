@@ -15,16 +15,16 @@ import {
 
 const FixState = props => {
     const initialState = {
-        fixes: [
-            {
-                id:120540672034,
+        fixes: {
+            '1': {
+                id:'25011890',
                 user:'618c0a5a607433ccb320892f',
                 userName:"Jack Dickson",
-                issue:"1",
-                solution:"Reworte authentication backend",
-                date: Date.now
+                solution:"Rewrote authentication backend",
+                date: Date.now()
             }
-        ]
+            
+        }
     }
 
     const [state, dispatch] = useReducer(fixReducer, initialState);
