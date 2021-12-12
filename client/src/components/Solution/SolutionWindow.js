@@ -53,7 +53,6 @@ const SolutionWindow = ({open, close, issueId}) => {
     }
     if(issueId in fixes) {
         const {userName, solution, date} = fixes[issueId]; 
-        const solutionDate = Date(date).toString();
         return ReactDom.createPortal(
             <Fragment>
                 <div style={OVERLAY_STYLES}/>
@@ -66,7 +65,7 @@ const SolutionWindow = ({open, close, issueId}) => {
                             <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Submitted By: " + userName}{' '}
                         </h4>
                         <h4 className="text-left">
-                            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + solutionDate}{' '}
+                            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + date}{' '}
                         </h4>
                         <h3 style={{"margin-top":"15px"}} >Edit Solution:</h3>
                         <form>

@@ -21,13 +21,14 @@ const FixState = props => {
                 user:'618c0a5a607433ccb320892f',
                 userName:"Jack Dickson",
                 solution:"Rewrote authentication backend",
-                date: Date.now()
+                date:  Date(Date.now()).toString()
             }
             
         }
     }
     const addFix = (fix, issueId) => {
-        fix.id = uuidv4(); 
+        fix.id = uuidv4();
+        fix.date = Date(Date.now()).toString();  
         const newFix = [issueId,fix];
         dispatch({type: ADD_FIX, payload: newFix});
     }

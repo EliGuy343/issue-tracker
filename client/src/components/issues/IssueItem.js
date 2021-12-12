@@ -7,7 +7,6 @@ import SolutionWindow from '../Solution/SolutionWindow';
 const IssueItem = ({issue, isAllIssues}) => {
 
     const {id,userName, name, category, date}  = issue;
-    const issueDate = Date(date).toString();
     const [isOpen, setIsOpen] = useState(false);
 
    // какого хуй блять???
@@ -27,7 +26,7 @@ const IssueItem = ({issue, isAllIssues}) => {
             <img src={categoryLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Category: " + category}{' '}
             </h4>
             <h4 className="text-left">
-            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + issueDate}{' '}
+            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + date}{' '}
             </h4>
             <div style={{"margin-top":"12px"}}>
                 <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}}>Edit</button>
