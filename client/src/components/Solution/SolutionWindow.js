@@ -1,4 +1,4 @@
-import React, {Fragment, useContext} from 'react'
+import React, {Fragment, useContext, useState} from 'react'
 import ReactDom from 'react-dom'
 import FixContext from '../../context/fixContext/fixContext'
 import issueLogo from '../../icons/issue.png';
@@ -8,6 +8,12 @@ const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
     const {fixes} = fixContext; 
+    const [fix, setFix] = useState({
+        user:"test",
+        userName:"test test",
+        solution:"",
+})
+
     const MODAL_STYLES = {
         position:'fixed',
         top:'50%',
@@ -32,8 +38,19 @@ const SolutionWindow = ({open, close, issueId}) => {
 
         return null;
     }
-   
     
+    const onChangeForm = e => setFix({...fix, [e.target.name]: e.target.value});
+
+    const onSubmitForm = e => {
+        debugger;
+        e.preventDefault(); 
+        fixContext.addFix(fix, issueId)
+        setFix({
+            user:"test",
+            userName:"test test",
+            solution:"",
+        })
+    }
     if(issueId in fixes) {
         const {userName, solution, date} = fixes[issueId]; 
         const solutionDate = Date(date).toString();
@@ -75,8 +92,8 @@ const SolutionWindow = ({open, close, issueId}) => {
             <div style={MODAL_STYLES}>    
                 <div className="card bg-light">
                     <h3>{"Add a solution"}</h3>
-                    <form>
-                    <input type="text" placeholder="Solution" name="solution" style={{"width":"100%"}}></input>
+                    <form onSubmit={onSubmitForm}>
+                    <input type="text" placeholder="Solution" name="solution" style={{"width":"100%"}} onChange={onChangeForm}></input>
                     <input type ='submit' value={"Submit"} className="btn btn-primary btn-block" ></input>
                     </form>
                     <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"6px", "font-size":"16px"}}>close</button>

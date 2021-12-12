@@ -38,7 +38,8 @@ const IssueState = props => {
     }
 
     const addIssue = issue => {
-        issue.id = uuidv4(); 
+        issue.id = uuidv4();
+        issue.date = Date.now() 
         dispatch({ type: ADD_ISSUE, payload: issue});
     }
 
