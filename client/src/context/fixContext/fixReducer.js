@@ -17,8 +17,14 @@ export default (state, action) => {
                     ...state.fixes,
                     [action.payload[0]]:action.payload[1]
                 }
-            }
-
+            };
+        case DELETE_FIX: 
+            const newFixes =  state.fixes;
+            delete newFixes[action.payload];  
+            return {
+                ...state, 
+                fixes:newFixes
+            };
         default:
             return state; 
     }

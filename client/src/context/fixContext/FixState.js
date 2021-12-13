@@ -9,7 +9,8 @@ import {
     DELETE_FIX,
     SET_CURRENT_ISSUE,
     CLEAR_CURRENT_ISSUE,
-    UPDATE_FIX
+    UPDATE_FIX,
+    DELETE_ISSUE
 } from '../types'
 
 
@@ -33,13 +34,17 @@ const FixState = props => {
         dispatch({type: ADD_FIX, payload: newFix});
     }
 
+    const deleteFix = id => {
+        dispatch({type: DELETE_FIX, payload: id}); 
+    }
 
     const [state, dispatch] = useReducer(fixReducer, initialState);
 
     return (
         <fixContext.Provider value={{
             fixes: state.fixes,
-            addFix
+            addFix,
+            deleteFix
         }}>
             {props.children}
         </fixContext.Provider>

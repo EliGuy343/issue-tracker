@@ -7,7 +7,7 @@ import dateLogo from '../../icons/date.png';
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
-    const {fixes} = fixContext; 
+    const {fixes, deleteFix} = fixContext; 
     const [fix, setFix] = useState({
         user:"test",
         userName:"test test",
@@ -51,6 +51,10 @@ const SolutionWindow = ({open, close, issueId}) => {
             solution:"",
         })
     }
+
+    const onDelete = () => {
+        deleteFix(issueId); 
+    }
     if(issueId in fixes) {
         const {userName, solution, date} = fixes[issueId]; 
         return ReactDom.createPortal(
@@ -73,7 +77,7 @@ const SolutionWindow = ({open, close, issueId}) => {
                             <input type ='submit' value={"Submit new Solution"} className="btn btn-primary btn-block" ></input>
                     </form>
                         <div>
-                            <button className="btn btn-danger btn-sm" style={{"font-size":"16px", "width":"100%"}}>Delete</button>
+                            <button className="btn btn-danger btn-sm" onClick={onDelete} style={{"font-size":"16px", "width":"100%"}}>Delete</button>
                         </div>
                         <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"12px", "font-size":"16px"}}>close</button>
                     </div>
