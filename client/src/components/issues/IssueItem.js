@@ -1,8 +1,8 @@
 import React, {Fragment, useContext, useState} from 'react';
 import issueLogo from '../../icons/issue.png';
-import engineerLogo from '../../icons/engineer.png'
-import categoryLogo from '../../icons/category.png'
-import dateLogo from '../../icons/date.png'
+import engineerLogo from '../../icons/engineer.png';
+import categoryLogo from '../../icons/category.png';
+import dateLogo from '../../icons/date.png';
 import SolutionWindow from '../Solution/SolutionWindow';
 const IssueItem = ({issue, isAllIssues}) => {
 

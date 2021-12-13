@@ -1,9 +1,9 @@
-import React, {Fragment, useContext, useState} from 'react'
-import ReactDom from 'react-dom'
-import FixContext from '../../context/fixContext/fixContext'
-import issueLogo from '../../icons/issue.png';
-import engineerLogo from '../../icons/engineer.png'
-import dateLogo from '../../icons/date.png'
+import React, {Fragment, useContext, useState} from 'react';
+import ReactDom from 'react-dom';
+import FixContext from '../../context/fixContext/fixContext';
+import handLogo from '../../icons/hand.png';
+import engineerLogo from '../../icons/engineer.png';
+import dateLogo from '../../icons/date.png';
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
@@ -59,7 +59,7 @@ const SolutionWindow = ({open, close, issueId}) => {
                 <div style={MODAL_STYLES}>
                     <div className ="card bg-light">    
                         <h4 className="text-left">
-                            <img src={issueLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Solution: " + solution}{' '}
+                            <img src={handLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Solution: " + solution}{' '}
                         </h4>
                         <h4 className="text-left">
                             <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Submitted By: " + userName}{' '}
