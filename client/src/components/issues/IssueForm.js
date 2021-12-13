@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
-import issueContext from '../../context/issueContext/issueContext';
-import IssueContext from '../../context/issueContext/issueContext'
+import IssueContext from '../../context/issueContext/issueContext';
 
 
 const IssueForm = () => {

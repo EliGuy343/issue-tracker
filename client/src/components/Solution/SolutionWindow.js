@@ -34,7 +34,7 @@ const SolutionWindow = ({open, close, issueId}) => {
         background:'rgba(0, 0, 0, .7)',
         zIndex: 1000 
     }
-    if(open == false) {
+    if(open === false) {
 
         return null;
     }
