@@ -10,8 +10,8 @@ const IssueItem = ({issue, isAllIssues}) => {
     const issueContext = useContext(IssueContext);
     const { deleteIssue } = issueContext; 
     const {id,userName, name, category, date}  = issue;
-    const [isOpen, setIsOpen] = useState(false);
-
+    const [isSolutionOpen, setIsSolutionOpen] = useState(false);
+    const [isEditOpen, setIsEditOpen] = useState(false); 
     const onDelete = () => {
         deleteIssue(id); 
     }
@@ -39,9 +39,9 @@ const IssueItem = ({issue, isAllIssues}) => {
                 <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}}>Edit</button>
                 <button className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
             </div>
-            <button className="btn btn-primary btn-sm" onClick={() => setIsOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
+            <button className="btn btn-primary btn-sm" onClick={() => setIsSolutionOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
 
-            <SolutionWindow open={isOpen} close={() => setIsOpen(false)} issueId={id}/>
+            <SolutionWindow open={isSolutionOpen} close={() => setIsSolutionOpen(false)} issueId={id}/>
         </div>
     )
 }
