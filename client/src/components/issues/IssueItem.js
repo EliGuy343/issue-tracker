@@ -4,10 +4,17 @@ import engineerLogo from '../../icons/engineer.png';
 import categoryLogo from '../../icons/category.png';
 import dateLogo from '../../icons/date.png';
 import SolutionWindow from '../Solution/SolutionWindow';
+import IssueContext from '../../context/issueContext/issueContext';
 const IssueItem = ({issue, isAllIssues}) => {
 
+    const issueContext = useContext(IssueContext);
+    const { deleteIssue } = issueContext; 
     const {id,userName, name, category, date}  = issue;
     const [isOpen, setIsOpen] = useState(false);
+
+    const onDelete = () => {
+        deleteIssue(id); 
+    }
 
    // какого хуй блять???
    // да не, все работает... 
@@ -30,7 +37,7 @@ const IssueItem = ({issue, isAllIssues}) => {
             </h4>
             <div style={{"margin-top":"12px"}}>
                 <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}}>Edit</button>
-                <button className="btn btn-danger btn-sm">Delete</button>
+                <button className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
             </div>
             <button className="btn btn-primary btn-sm" onClick={() => setIsOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
 
