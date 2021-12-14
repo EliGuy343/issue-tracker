@@ -22,7 +22,11 @@ export default (state, action) => {
                 ...state, 
                 issues: state.issues.filter(issue => issue.id !== action.payload)
             };
-            
+        case UPDATE_ISSUE:
+            return {
+                ...state, 
+                issues: state.issues.map(issue => issue.id === action.payload.id ? action.payload : issue)
+            };
         default:
             return state; 
     }

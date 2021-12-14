@@ -29,6 +29,7 @@ const IssueEditWindow = ({open, issue, close}) => {
 
 
     const [editIssue, setEditIssue] = useState({
+        id:issue.id, 
         name:issue.name,
         userName:issue.userName,
         category:issue.category,
@@ -38,6 +39,11 @@ const IssueEditWindow = ({open, issue, close}) => {
     ); 
 
     const onChange = e => setEditIssue({...editIssue, [e.target.name]: e.target.value});
+    const onSubmit = e => {
+        e.preventDefault(); 
+        issueContext.updateIssue(editIssue);
+        close();  
+    }
 
     if(open === false) {
 
@@ -50,10 +56,10 @@ const IssueEditWindow = ({open, issue, close}) => {
             <div style={MODAL_STYLES}>
             
                 <div className ="card bg-light">
-                    <form>
+                    <form onSubmit={onSubmit}>  
                         <h2 className="text-primary">Edit Issue:</h2>
-                        <input type="text" placeholder="name" name="name" value={issue.name} onChange={onChange} />
-                        <input type="text" placeholder="category" name="category" value={issue.category} onChange={onChange} />
+                        <input type="text" placeholder="name" name="name" value={editIssue.name} onChange={onChange} />
+                        <input type="text" placeholder="category" name="category" value={editIssue.category} onChange={onChange} />
                         <input type="submit" value="Update issue" className="btn btn-primary btn-block"/>
                     </form>
                 <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"12px", "font-size":"16px"}}>close</button>
