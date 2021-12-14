@@ -34,6 +34,7 @@ const SolutionWindow = ({open, close, issueId}) => {
         background:'rgba(0, 0, 0, .7)',
         zIndex: 1000 
     }
+
     if(open === false) {
 
         return null;
@@ -42,7 +43,7 @@ const SolutionWindow = ({open, close, issueId}) => {
     const onChangeForm = e => setFix({...fix, [e.target.name]: e.target.value});
 
     const onSubmitForm = e => {
-        debugger;
+
         e.preventDefault(); 
         fixContext.addFix(fix, issueId)
         setFix({

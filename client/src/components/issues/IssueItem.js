@@ -4,6 +4,7 @@ import engineerLogo from '../../icons/engineer.png';
 import categoryLogo from '../../icons/category.png';
 import dateLogo from '../../icons/date.png';
 import SolutionWindow from '../Solution/SolutionWindow';
+import IssueEditWindow from '../issues/IssueEditWindow'; 
 import IssueContext from '../../context/issueContext/issueContext';
 const IssueItem = ({issue, isAllIssues}) => {
 
@@ -36,12 +37,13 @@ const IssueItem = ({issue, isAllIssues}) => {
             <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + date}{' '}
             </h4>
             <div style={{"margin-top":"12px"}}>
-                <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}}>Edit</button>
+                <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}} onClick={() => setIsEditOpen(true)}>Edit</button>
                 <button className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
             </div>
             <button className="btn btn-primary btn-sm" onClick={() => setIsSolutionOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
 
             <SolutionWindow open={isSolutionOpen} close={() => setIsSolutionOpen(false)} issueId={id}/>
+            <IssueEditWindow open={isEditOpen} issue={issue} close={() => setIsEditOpen(false)}/>
         </div>
     )
 }

@@ -1,7 +1,8 @@
 import IssueContext from "../../context/issueContext/issueContext";
-import React, {Fragment, useContext} from 'react';
+import ReactDom from 'react-dom';
+import React, {Fragment, useContext, useState} from 'react';
 
-const IssueEditWindow = (open, issue) => {
+const IssueEditWindow = ({open, issue, close}) => {
 
     const MODAL_STYLES = {
         position:'fixed',
@@ -23,17 +24,42 @@ const IssueEditWindow = (open, issue) => {
         background:'rgba(0, 0, 0, .7)',
         zIndex: 1000 
     }
+
+    const issueContext = useContext(IssueContext); 
+
+
+    const [editIssue, setEditIssue] = useState({
+        name:issue.name,
+        userName:issue.userName,
+        category:issue.category,
+        date:issue.date
+    }
+
+    ); 
+
+    const onChange = e => setEditIssue({...editIssue, [e.target.name]: e.target.value});
+
     if(open === false) {
 
         return null;
     }
     
-    return ReactDOM.createPortal(
+    return ReactDom.createPortal(
         <Fragment>
             <div style={OVERLAY_STYLES}/>
             <div style={MODAL_STYLES}>
-                <h3>Proverka</h3>
+            
+                <div className ="card bg-light">
+                    <form>
+                        <h2 className="text-primary">Edit Issue:</h2>
+                        <input type="text" placeholder="name" name="name" value={issue.name} onChange={onChange} />
+                        <input type="text" placeholder="category" name="category" value={issue.category} onChange={onChange} />
+                        <input type="submit" value="Update issue" className="btn btn-primary btn-block"/>
+                    </form>
+                <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"12px", "font-size":"16px"}}>close</button>
+                </div>
             </div>
+           
         </Fragment>,
          document.getElementById('portal')
     )
