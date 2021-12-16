@@ -26,10 +26,14 @@ export default (state, action) => {
                 issues: state.issues.map(issue => issue.id === action.payload.id ? action.payload : issue)
             };
         case FILTER_ISSUES:
+            let regexText = action.payload
+            if(regexText.charAt(regexText.length - 1) === `\\`) {
+                regexText = regexText.concat(" ");
+            }
             return {
                 ...state, 
                 filtered: state.issues.filter(issue => {
-                    const regex = new RegExp(`${action.payload}`, 'gi');
+                    const regex = new RegExp(`${regexText}`, 'gi');
                     return issue.name.match(regex);
                 })
             };

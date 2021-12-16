@@ -5,12 +5,17 @@ import IssueContext from '../../context/issueContext/issueContext';
 
 const Issues = ({isAllIssues}) => {
     const issueContext = useContext(IssueContext);
-    const {issues} = issueContext;
+    const {issues, filtered} = issueContext;
     
-
+    if(issues.length === 0){
+        return <h4>No Issues found, lucky you...</h4>
+    }
+ 
     return (
         <Fragment>
-            {issues.map(issue => <IssueItem key={issue.id} issue={issue} isAllIssues={isAllIssues}/>)}
+
+            {filtered !== null ? filtered.map(issue => (<IssueItem key={issue.id} issue={issue}/>)) : 
+            issues.map(issue => <IssueItem key={issue.id} issue={issue} isAllIssues={isAllIssues}/>)}
         </Fragment>
     )
 }
