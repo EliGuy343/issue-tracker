@@ -1,8 +1,6 @@
 import {
     ADD_FIX,
     DELETE_FIX,
-    SET_CURRENT_ISSUE,
-    CLEAR_CURRENT_ISSUE,
     UPDATE_FIX
 } from '../types'
 
