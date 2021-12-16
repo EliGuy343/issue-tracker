@@ -25,6 +25,14 @@ export default (state, action) => {
                 ...state, 
                 fixes:newFixes
             };
+        case UPDATE_FIX:
+            return {
+                ...state,
+                fixes:{
+                    ...state.fixes,
+                    [action.payload[0]]:action.payload[1]
+                }
+            }; 
         default:
             return state; 
     }

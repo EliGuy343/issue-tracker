@@ -7,11 +7,12 @@ import dateLogo from '../../icons/date.png';
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
-    const {fixes, deleteFix} = fixContext; 
+    const {fixes, deleteFix, updateFix} = fixContext; 
+ 
     const [fix, setFix] = useState({
         user:"test",
         userName:"test test",
-        solution:"",
+        solution:""
 })
 
     const MODAL_STYLES = {
@@ -53,35 +54,48 @@ const SolutionWindow = ({open, close, issueId}) => {
         })
     }
 
+    const onSubmitUpdateForm = e => {
+        e.preventDefault();
+        updateFix(fix, issueId);
+        setFix({
+            user:"test",
+            userName:"test test",
+            solution:"",
+        })
+        close(); 
+    }
     const onDelete = () => {
         deleteFix(issueId); 
     }
     if(issueId in fixes) {
-        const {userName, solution, date} = fixes[issueId]; 
+        const {id,userName, solution, date} = fixes[issueId]; 
+        
+       
+
         return ReactDom.createPortal(
             <Fragment>
                 <div style={OVERLAY_STYLES}/>
                 <div style={MODAL_STYLES}>
                     <div className ="card bg-light">    
                         <h4 className="text-left">
-                            <img src={handLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Solution: " + solution}{' '}
+                            <img src={handLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Solution: " + solution}{' '}
                         </h4>
                         <h4 className="text-left">
-                            <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Submitted By: " + userName}{' '}
+                            <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Submitted By: " + userName}{' '}
                         </h4>
                         <h4 className="text-left">
-                            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + date}{' '}
+                            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Submission Date: " + date}{' '}
                         </h4>
-                        <h3 style={{"margin-top":"15px"}} >Edit Solution:</h3>
-                        <form>
-                            <input type="text" placeholder={"Enter new Solution"} name="newSolution" style={{"width":"100%"}}></input>
+                        <h3 style={{"marginTop":"15px"}} >Edit Solution:</h3>
+                        <form onSubmit={onSubmitUpdateForm}>
+                            <input type="text" placeholder={"Enter new Solution"} name="solution" onChange={onChangeForm} style={{"width":"100%"}}></input>
                             <input type ='submit' value={"Submit new Solution"} className="btn btn-primary btn-block" ></input>
                     </form>
                         <div>
-                            <button className="btn btn-danger btn-sm" onClick={onDelete} style={{"font-size":"16px", "width":"100%"}}>Delete</button>
+                            <button className="btn btn-danger btn-sm" onClick={onDelete} style={{"fontSize":"16px", "width":"100%"}}>Delete</button>
                         </div>
-                        <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"12px", "font-size":"16px"}}>close</button>
-                    </div>
+                        <button className="btn btn-dark btn-sm" onClick={close} style={{"marginTop":"12px", "fontSize":"16px"}}>close</button>
+                    </div>  
                 </div>
             </Fragment>,
             document.getElementById('portal')
@@ -100,7 +114,7 @@ const SolutionWindow = ({open, close, issueId}) => {
                     <input type="text" placeholder="Solution" name="solution" style={{"width":"100%"}} onChange={onChangeForm}></input>
                     <input type ='submit' value={"Submit"} className="btn btn-primary btn-block" ></input>
                     </form>
-                    <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"6px", "font-size":"16px"}}>close</button>
+                    <button className="btn btn-dark btn-sm" onClick={close} style={{"marginTop":"6px", "fontSize":"16px"}}>close</button>
                 </div>
             </div>
         </Fragment>,

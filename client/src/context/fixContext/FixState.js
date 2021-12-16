@@ -7,10 +7,7 @@ import axios from 'axios';
 import {
     ADD_FIX,
     DELETE_FIX,
-    SET_CURRENT_ISSUE,
-    CLEAR_CURRENT_ISSUE,
-    UPDATE_FIX,
-    DELETE_ISSUE
+    UPDATE_FIX
 } from '../types'
 
 
@@ -38,13 +35,20 @@ const FixState = props => {
         dispatch({type: DELETE_FIX, payload: id}); 
     }
 
+    const updateFix = (fix,issueId) => {
+        fix.id = uuidv4(); 
+        fix.date = Date(Date.now()).toString(); 
+        const updatedFix = [issueId,fix]; 
+        dispatch({type:UPDATE_FIX, payload: updatedFix}); 
+    }
     const [state, dispatch] = useReducer(fixReducer, initialState);
 
     return (
         <fixContext.Provider value={{
             fixes: state.fixes,
             addFix,
-            deleteFix
+            deleteFix,
+            updateFix
         }}>
             {props.children}
         </fixContext.Provider>

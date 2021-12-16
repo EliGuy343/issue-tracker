@@ -14,7 +14,7 @@ const App = () => {
     <FixState>
       <IssueState>
         <Router>
-        <Fragment className="container">
+        <Fragment>
           <Navbar />
             <div>
               <Routes>

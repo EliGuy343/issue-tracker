@@ -25,22 +25,22 @@ const IssueItem = ({issue, isAllIssues}) => {
     return (
         <div className ="card bg-light">
             <h4 className="text-left">
-            <img src={issueLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Issue: " + name}{' '}
+            <img src={issueLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Issue: " + name}{' '}
             </h4>
             {isAllIssues ? <h4 className="text-left">
-            <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} /> {"Submitted By: " + userName}{' '}
+            <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Submitted By: " + userName}{' '}
             </h4> : null}
             <h4 className="text-left">
-            <img src={categoryLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Category: " + category}{' '}
+            <img src={categoryLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Category: " + category}{' '}
             </h4>
             <h4 className="text-left">
-            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "margin-top":"6px"}} />  {"Submission Date: " + date}{' '}
+            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Submission Date: " + date}{' '}
             </h4>
-            <div style={{"margin-top":"12px"}}>
-                <button className="btn btn-dark btn-sm" style={{"margin-right":"16px"}} onClick={() => setIsEditOpen(true)}>Edit</button>
+            <div style={{"marginTop":"12px"}}>
+                <button className="btn btn-dark btn-sm" style={{"marginRight":"16px"}} onClick={() => setIsEditOpen(true)}>Edit</button>
                 <button className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
             </div>
-            <button className="btn btn-primary btn-sm" onClick={() => setIsSolutionOpen(true)} style={{"margin-top":"6px"}}>Add/View Solution</button>
+            <button className="btn btn-primary btn-sm" onClick={() => setIsSolutionOpen(true)} style={{"marginTop":"6px"}}>Add/View Solution</button>
 
             <SolutionWindow open={isSolutionOpen} close={() => setIsSolutionOpen(false)} issueId={id}/>
             <IssueEditWindow open={isEditOpen} issue={issue} close={() => setIsEditOpen(false)}/>
