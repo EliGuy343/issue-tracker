@@ -62,7 +62,7 @@ const IssueEditWindow = ({open, issue, close}) => {
                         <input type="text" placeholder="category" name="category" value={editIssue.category} onChange={onChange} />
                         <input type="submit" value="Update issue" className="btn btn-primary btn-block"/>
                     </form>
-                <button className="btn btn-dark btn-sm" onClick={close} style={{"margin-top":"12px", "font-size":"16px"}}>close</button>
+                <button className="btn btn-dark btn-sm" onClick={close} style={{"marginTop":"12px", "fontSize":"16px"}}>close</button>
                 </div>
             </div>
            
