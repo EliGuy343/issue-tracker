@@ -1,8 +1,6 @@
 import {
     ADD_ISSUE,
     DELETE_ISSUE,
-    SET_CURRENT,
-    CLEAR_CURRENT,
     UPDATE_ISSUE,
     FILTER_ISSUES,
     CLEAR_FILTER,
@@ -27,6 +25,19 @@ export default (state, action) => {
                 ...state, 
                 issues: state.issues.map(issue => issue.id === action.payload.id ? action.payload : issue)
             };
+        case FILTER_ISSUES:
+            return {
+                ...state, 
+                filtered: state.issues.filter(issue => {
+                    const regex = new RegExp(`${action.payload}`, 'gi');
+                    return issue.name.match(regex);
+                })
+            };
+        case CLEAR_FILTER:
+            return {
+                ...state,
+                filtered:null
+            }
         default:
             return state; 
     }

@@ -7,8 +7,6 @@ import axios from 'axios';
 import {
     ADD_ISSUE,
     DELETE_ISSUE,
-    SET_CURRENT,
-    CLEAR_CURRENT,
     UPDATE_ISSUE,
     FILTER_ISSUES,
     CLEAR_FILTER,
@@ -34,7 +32,8 @@ const IssueState = props => {
                 category:"UI",
                 date: Date(Date.now()).toString()
             }
-        ]
+        ],
+        filtered:null
     }
 
     const addIssue = issue => {
@@ -49,15 +48,25 @@ const IssueState = props => {
     const updateIssue = issue => {
         dispatch({type:UPDATE_ISSUE, payload:issue}); 
     }
+
+    const filterIssues = text => {
+        dispatch({type:FILTER_ISSUES, payload: text}); 
+    }; 
+    const clearFilter = () => {
+        dispatch({type:CLEAR_FILTER});
+    }
     const [state, dispatch] = useReducer(issueReducer, initialState); 
 
     return (
         <issueContext.Provider
         value={{
             issues: state.issues,
+            filtered: state.filtered,
             addIssue,
             deleteIssue,
-            updateIssue
+            updateIssue,
+            filterIssues,
+            clearFilter
         }}>
             {props.children}
         </issueContext.Provider>
