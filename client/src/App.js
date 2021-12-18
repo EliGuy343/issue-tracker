@@ -9,6 +9,8 @@ import MyIssues from './components/pages/MyIssues';
 import IssueState from './context/issueContext/IssueState';
 import FixState from './context/fixContext/FixState';
 import AuthState from './context/authContext/AuthState'
+import Register from './components/auth/Register';
+import Login from './components/auth/login';
 const App = () => {
   return (
     <AuthState>
@@ -23,6 +25,8 @@ const App = () => {
                   <Route exact path='/about' element={<About/>}/>
                   <Route exact path='/myissues' element={<MyIssues/>}/>
                   <Route exact path='/AllIssues' element={<AllIssues/>}/>
+                  <Route exact path='/register' element={<Register/>}/>
+                  <Route exact path='/login' element={<Login/>}/>
                 </Routes>
               </div>
           </Fragment>
