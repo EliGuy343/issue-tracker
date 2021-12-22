@@ -7,7 +7,7 @@ import {
 export default (state, action) => {
 
     switch(action.type) {
-
+        case UPDATE_FIX:
         case ADD_FIX:
             return {
                 ...state,
@@ -22,14 +22,6 @@ export default (state, action) => {
             return {
                 ...state, 
                 fixes:newFixes
-            };
-        case UPDATE_FIX:
-            return {
-                ...state,
-                fixes:{
-                    ...state.fixes,
-                    [action.payload[0]]:action.payload[1]
-                }
             }; 
         default:
             return state; 
