@@ -1,21 +1,28 @@
 import React, {useContext, useEffect, useState} from 'react'
 import AlertContext from '../../context/alertContext/alertContext';
 import AuthContext from '../../context/authContext/authContext';
+import { useNavigate } from 'react-router-dom';
 
+    
 
-const Register = () => {
+const Register = props => {
     const alertContext = useContext(AlertContext); 
     const authContext = useContext(AuthContext);
-
+    const naviagte = useNavigate(); 
     const {setAlert} = alertContext; 
-    const {register, error, clearErrors} = authContext;
+    const {register, error, clearErrors, isAuthenticated} = authContext;
 
     useEffect(() => {
+        if(isAuthenticated) {
+            
+            naviagte('/'); 
+        }
         if(error === 'user already exists') {
             setAlert(error, 'danger');
             clearErrors(); 
         }
-    }, [error]);
+    // eslint-disable-next-line
+    }, [error, isAuthenticated, props.history]);
 
     const [user, setUser] = useState({
         name:'',

@@ -3,6 +3,9 @@ import {v4 as uuidv4} from 'uuid';
 import authContext from './authContext';
 import authReducer from './authReducer';
 import axios from 'axios';
+import setAuthToken from '../../utils/setAuthToken';
+
+
 
 import {
     REGISTER_SUCCESS,
@@ -44,7 +47,7 @@ const AuthState = props => {
                 type: REGISTER_SUCCESS,
                 payload: res.data
             }); 
-            
+            loadUser(); 
         } catch (error) {
             dispatch({
                 type: REGISTER_FAIL,
@@ -53,6 +56,28 @@ const AuthState = props => {
         }
     }
     
+    const loadUser = async () => {
+        if(localStorage.token) {
+            setAuthToken(localStorage.token); 
+        }
+
+
+        try {
+            const res = await axios.get('/api/auth'); 
+
+            dispatch({
+                type: USER_LOADED,
+                payload: res.data
+            });
+        } catch (error) {
+            console.log(error.response.data.msg); 
+            dispatch({
+                type: AUTH_ERROR,
+                payload: error.response.data.msg
+            });
+        }
+    };
+
     const clearErrors = () => dispatch({
         type: CLEAR_ERRORS
     });
@@ -66,7 +91,8 @@ const AuthState = props => {
                 loading:state.loading,
                 error:state.error,
                 register,
-                clearErrors
+                clearErrors,
+                loadUser
             }}
         > 
         {props.children}
