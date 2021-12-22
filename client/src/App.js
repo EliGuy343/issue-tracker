@@ -14,10 +14,11 @@ import Register from './components/auth/Register';
 import Login from './components/auth/login';
 import Alerts from './components/layout/Alerts';
 import setAuthToken from './utils/setAuthToken';
-
+import Authenticator from './components/auth/Authenticator';
 if (localStorage.token) {
   setAuthToken(localStorage.token); 
 }
+
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <AlertState>
             <Router>
             <Fragment>
+              <Authenticator/>
               <Navbar />
                 <div>
                   <Alerts/>
