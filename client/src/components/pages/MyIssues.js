@@ -15,7 +15,7 @@ const MyIssues = () => {
         if(isAuthenticated === null) {
             navigate('/'); 
         } 
-
+ // eslint-disable-next-line
     },[isAuthenticated])
 
 

@@ -38,7 +38,7 @@ const Register = props => {
 
     const onSubmit = e => {
         e.preventDefault(); 
-        if( name == '' || email == '' || password == '') {
+        if( name === '' || email === '' || password ==='') {
             setAlert('Please enter all fields', 'danger');
         } else if (password !== password2) {
             setAlert(`password doesn't match confirmation`, 'danger');

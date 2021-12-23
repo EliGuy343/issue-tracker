@@ -8,12 +8,12 @@ const AllIssues = () => {
     const authContext = useContext(AuthContext); 
     const {isAuthenticated} = authContext
     const navigate = useNavigate(); 
-    
+
     useEffect(() => {
         if(isAuthenticated === null) {
             navigate('/'); 
         } 
-
+ // eslint-disable-next-line
     },[isAuthenticated])
 
     return (
