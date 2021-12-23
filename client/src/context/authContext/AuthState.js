@@ -17,6 +17,7 @@ import {
     LOGOUT,
     CLEAR_ERRORS
 } from '../types'
+// столько проблем изо вот этого говна...  import res from 'express/lib/response';
 
 const AuthState = props => {
 
@@ -56,6 +57,29 @@ const AuthState = props => {
         }
     }
     
+    const login = async formdata => {
+        const config = {
+            Headers:{
+                'Content-Type':'application/json'
+            }
+        }
+
+        try {
+            const res = await axios.post('/api/auth', formdata, config); 
+            dispatch({
+                type:LOGIN_SUCCESS,
+                payload: res.data
+            })
+            loadUser(); 
+        } catch (error) {
+            dispatch({
+                type: LOGIN_FAIL,
+                payload: error.response.data.msg
+            })
+
+        }
+    }
+
     const loadUser = async () => {
         if(localStorage.token) {
             setAuthToken(localStorage.token); 
@@ -91,7 +115,8 @@ const AuthState = props => {
                 error:state.error,
                 register,
                 clearErrors,
-                loadUser
+                loadUser,
+                login
             }}
         > 
         {props.children}
