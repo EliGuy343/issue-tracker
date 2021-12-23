@@ -68,6 +68,7 @@ const SolutionWindow = ({open, close, issueId}) => {
         deleteFix(issueId); 
     }
     if(issueId in fixes) {
+        // id is needed later for when we make edits and update the database
         const {id,userName, solution, date} = fixes[issueId]; 
         
        
