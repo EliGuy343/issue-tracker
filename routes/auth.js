@@ -42,7 +42,7 @@ router.post('/',[
 
     try {
         let user = await User.findOne({ email});
-
+        
         if(!user) {
             return res.status(500).json({msg:"User doesn't exist"});
         }
