@@ -4,17 +4,16 @@ import FixContext from '../../context/fixContext/fixContext';
 import handLogo from '../../icons/hand.png';
 import engineerLogo from '../../icons/engineer.png';
 import dateLogo from '../../icons/date.png';
+import AuthContext from '../../context/authContext/authContext';
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
     const {fixes, deleteFix, updateFix} = fixContext; 
- 
-    const [fix, setFix] = useState({
-        user:"test",
-        userName:"test test",
-        solution:""
-})
+    const authcontext = useContext(AuthContext);
+    const {user} = authcontext; 
 
+    const [fix, setFix] = useState({solution:""})
+   
     const MODAL_STYLES = {
         position:'fixed',
         top:'50%',
@@ -41,27 +40,22 @@ const SolutionWindow = ({open, close, issueId}) => {
         return null;
     }
     
+
+
     const onChangeForm = e => setFix({...fix, [e.target.name]: e.target.value});
 
     const onSubmitForm = e => {
 
         e.preventDefault(); 
-        fixContext.addFix(fix, issueId)
-        setFix({
-            user:"test",
-            userName:"test test",
-            solution:"",
-        })
+        fixContext.addFix({user:user._id, userName:user.name, solution:fix.solution}, issueId)
+        setFix({solution:""})
+        close();
     }
 
     const onSubmitUpdateForm = e => {
         e.preventDefault();
-        updateFix(fix, issueId);
-        setFix({
-            user:"test",
-            userName:"test test",
-            solution:"",
-        })
+        updateFix({user:user._id, userName:user.name, solution:fix.solution}, issueId);
+        setFix({ solution:""})
         close(); 
     }
     const onDelete = () => {

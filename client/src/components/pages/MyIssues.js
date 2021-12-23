@@ -1,8 +1,24 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import IssueForm from '../issues/IssueForm'
 import Issues from '../issues/Issues'
 import IssueFilter from '../issues/IssueFilter'
+import AuthContext from '../../context/authContext/authContext'
+import { useNavigate } from 'react-router-dom'
+
 const MyIssues = () => {
+    const authContext = useContext(AuthContext); 
+    const {isAuthenticated} = authContext
+    const navigate = useNavigate(); 
+
+
+    useEffect(() => {
+        if(isAuthenticated === null) {
+            navigate('/'); 
+        } 
+
+    },[isAuthenticated])
+
+
     return (
         <div className="grid-2">
             <div>
