@@ -2,17 +2,25 @@ import React,{Fragment, useContext} from 'react';
 import {AiFillBug} from 'react-icons/ai'; 
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authContext/authContext';
-import exitLogo from '../../icons/exit.png';
+import { useNavigate } from 'react-router-dom'
+
+
 const Navbar = () => {
     const authContext = useContext(AuthContext); 
     const {isAuthenticated, logout, user } = authContext; 
-
+    
+    const navigate = useNavigate();
+    const onLogout = () => {
+        logout();
+        navigate('/');
+    }
+    
     const authlinks = (
         <Fragment>
             <li>Hello { user && user.name}</li>
             <li>
                 <a href='#!'>
-                <span className='hide-sm'>Logout</span>
+                <span onClick={onLogout} className='hide-sm'>Logout</span>
                 </a>
             </li>
             <li>
