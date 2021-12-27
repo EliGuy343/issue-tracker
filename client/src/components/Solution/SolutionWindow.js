@@ -5,13 +5,16 @@ import handLogo from '../../icons/hand.png';
 import engineerLogo from '../../icons/engineer.png';
 import dateLogo from '../../icons/date.png';
 import AuthContext from '../../context/authContext/authContext';
+import AlertContext from '../../context/alertContext/alertContext';
+
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
     const {fixes, deleteFix, updateFix} = fixContext; 
     const authcontext = useContext(AuthContext);
     const {user} = authcontext; 
-
+    const alertContext = useContext(AlertContext); 
+    const {setAlert} = alertContext;
     const [fix, setFix] = useState({solution:""})
    
     const MODAL_STYLES = {
@@ -46,17 +49,25 @@ const SolutionWindow = ({open, close, issueId}) => {
 
     const onSubmitForm = e => {
 
-        e.preventDefault(); 
-        fixContext.addFix({user:user._id, userName:user.name, solution:fix.solution}, issueId)
-        setFix({solution:""})
-        close();
+        e.preventDefault();
+        if(fix.solution === '') {
+            setAlert("Solution can't be empty",'danger'); 
+        } else {
+            fixContext.addFix({user:user._id, userName:user.name, solution:fix.solution}, issueId);
+            setFix({solution:""});
+            close();
+        }
     }
 
     const onSubmitUpdateForm = e => {
         e.preventDefault();
-        updateFix({user:user._id, userName:user.name, solution:fix.solution}, issueId);
-        setFix({ solution:""})
-        close(); 
+        if(fix.solution === '') {
+            setAlert("Solution can't be empty",'danger'); 
+        } else {
+            updateFix({user:user._id, userName:user.name, solution:fix.solution}, issueId);
+            setFix({ solution:""});
+            close();
+        } 
     }
     const onDelete = () => {
         deleteFix(issueId); 
@@ -71,7 +82,7 @@ const SolutionWindow = ({open, close, issueId}) => {
             <Fragment>
                 <div style={OVERLAY_STYLES}/>
                 <div style={MODAL_STYLES}>
-                    <div className ="card bg-light">    
+                    <div className ="card bg-light">  
                         <h4 className="text-left">
                             <img src={handLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Solution: " + solution}{' '}
                         </h4>
