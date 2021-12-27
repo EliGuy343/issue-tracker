@@ -1,13 +1,14 @@
 import React, {useContext, useState} from 'react';
 import IssueContext from '../../context/issueContext/issueContext';
 import AuthContext from '../../context/authContext/authContext';
-
+import AlertContext from '../../context/alertContext/alertContext';
 const IssueForm = () => {
 
     const authcontext = useContext(AuthContext);
     const {user} = authcontext; 
     const issueContext = useContext(IssueContext); 
-
+    const alertContext = useContext(AlertContext);
+    const {setAlert} = alertContext;  
 
     const [issue, setIssue] = useState({
         name:'',
@@ -23,15 +24,23 @@ const IssueForm = () => {
     const onSubmit = e => {
         e.preventDefault(); 
         issue.userName = user.name;
-        debugger;
-        issueContext.addIssue(issue);
-        
-        setIssue({
-            name:'',
-            userName:'',
-            category:'',
-            date:''
-        });
+        if(issue.name === '') {
+            setAlert('Please enter the issue before submitting', 'danger');
+
+        }
+        else if(issue.category === '') {
+            setAlert('Please enter category', 'danger');
+        }
+        else {
+            issueContext.addIssue(issue);
+            
+            setIssue({
+                name:'',
+                userName:'',
+                category:'',
+                date:''
+            });
+        }
     }
 
     return (
