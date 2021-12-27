@@ -1,10 +1,11 @@
 import React, {useContext, useState} from 'react';
 import IssueContext from '../../context/issueContext/issueContext';
-
+import AuthContext from '../../context/authContext/authContext';
 
 const IssueForm = () => {
 
-
+    const authcontext = useContext(AuthContext);
+    const {user} = authcontext; 
     const issueContext = useContext(IssueContext); 
 
 
@@ -21,7 +22,10 @@ const IssueForm = () => {
 
     const onSubmit = e => {
         e.preventDefault(); 
+        issue.userName = user.name;
+        debugger;
         issueContext.addIssue(issue);
+        
         setIssue({
             name:'',
             userName:'',
