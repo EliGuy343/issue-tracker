@@ -10,11 +10,11 @@ const IssueItem = ({issue, isAllIssues}) => {
 
     const issueContext = useContext(IssueContext);
     const { deleteIssue } = issueContext; 
-    const {id,userName, name, category, date}  = issue;
+    const {_id,userName, name, category, date}  = issue;
     const [isSolutionOpen, setIsSolutionOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false); 
     const onDelete = () => {
-        deleteIssue(id); 
+        deleteIssue(_id); 
     }
 
    // какого хуй блять???
@@ -42,7 +42,7 @@ const IssueItem = ({issue, isAllIssues}) => {
             </div>
             <button className="btn btn-primary btn-sm" onClick={() => setIsSolutionOpen(true)} style={{"marginTop":"6px"}}>Add/View Solution</button>
 
-            <SolutionWindow open={isSolutionOpen} close={() => setIsSolutionOpen(false)} issueId={id}/>
+            <SolutionWindow open={isSolutionOpen} close={() => setIsSolutionOpen(false)} issueId={_id}/>
             <IssueEditWindow open={isEditOpen} issue={issue} close={() => setIsEditOpen(false)}/>
         </div>
     )

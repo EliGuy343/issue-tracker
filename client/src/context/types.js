@@ -8,6 +8,7 @@ export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT'; 
 export const ADD_FIX = 'ADD_FIX';
 export const DELETE_FIX = 'DELETE_FIX'; 
+export const FIX_ERROR = 'FIX_ERROR';
 export const SET_CURRENT_ISSUE = 'SET_CURRENT_ISSUE';
 export const CLEAR_CURRENT_ISSUE = 'CLEAR_CURRENT_ISSIE'; 
 export const UPDATE_FIX = 'UPDATE_FIX'; 

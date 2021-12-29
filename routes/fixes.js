@@ -82,6 +82,7 @@ router.post('/',[auth,[
     const issueForFixCheck = await Fix.findOne({issue}) 
 
     if(issueForFixCheck) {
+        
         return res.status(400).json({msg:"Fix already exists for this issue"})
     }
     
@@ -89,6 +90,7 @@ router.post('/',[auth,[
     console.log(issueCheck)
     
     if(!issueCheck) {
+        
         return res.status(400).json({msg:"Invalid Issue ID"});
     }
 

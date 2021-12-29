@@ -1,7 +1,8 @@
 import {
     ADD_FIX,
     DELETE_FIX,
-    UPDATE_FIX
+    UPDATE_FIX,
+    FIX_ERROR
 } from '../types'
 
 export default (state, action) => {
@@ -22,7 +23,12 @@ export default (state, action) => {
             return {
                 ...state, 
                 fixes:newFixes
-            }; 
+            };
+        case FIX_ERROR:
+            return {
+                ...state,
+                error:action.payload
+            };
         default:
             return state; 
     }

@@ -7,7 +7,8 @@ import axios from 'axios';
 import {
     ADD_FIX,
     DELETE_FIX,
-    UPDATE_FIX
+    UPDATE_FIX,
+    FIX_ERROR
 } from '../types'
 
 
@@ -24,11 +25,22 @@ const FixState = props => {
             
         }
     }
-    const addFix = (fix, issueId) => {
-        fix.id = uuidv4();
-        fix.date = Date(Date.now()).toString();  
-        const newFix = [issueId,fix];
-        dispatch({type: ADD_FIX, payload: newFix});
+    const addFix = async (fix, issueId) => {
+        
+        const config = {
+            headers: {
+                'Content-type':'application/json'
+            }
+        };
+        try {   
+            const res = await axios.post('/api/fixes',{issue:issueId, solution:fix.solution}, config);
+            const newFix = [issueId,res.data];
+            dispatch({type: ADD_FIX, payload: newFix});
+        }
+        catch (error) {
+            dispatch({type:FIX_ERROR, payload: error.response.msg});
+            debugger;
+        }   
     }
 
     const deleteFix = id => {
