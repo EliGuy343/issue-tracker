@@ -10,36 +10,28 @@ import {
     UPDATE_ISSUE,
     FILTER_ISSUES,
     CLEAR_FILTER,
+    ISSUE_ERROR
 } from '../types'
 
 const IssueState = props => {
     const initialState = {
-        issues : [
-            {   
-                id:'1',
-                user:'618c0a5a607433ccb320892f',
-                userName:'Jack Dickson',
-                name:`register fails on regular login`,
-                category:"authentication",
-                date: Date(Date.now()).toString()
-                
-            },
-            {
-                id:'2',
-                user:'618c0a5a607433ccb320892f',
-                userName:'Jack Dickson',
-                name:`solution components don't load`,
-                category:"UI",
-                date: Date(Date.now()).toString()
-            }
-        ],
-        filtered:null
+        issues : [],
+        filtered:null,
+        error:null
     }
 
-    const addIssue = issue => {
-        issue.id = uuidv4();
-        issue.date = Date(Date.now()).toString() 
-        dispatch({ type: ADD_ISSUE, payload: issue});
+    const addIssue = async issue => {
+        const config = {
+            headers: {
+                'Content-type':'application/json'
+            }
+        };
+        try {
+            const res = await axios.post('/api/issues', issue, config);
+            dispatch({type: ADD_ISSUE, payload: res.data});
+        } catch (error) {
+            dispatch({type:ISSUE_ERROR, payload:error.response.msg });
+        }
     }
 
     const deleteIssue = id => {
@@ -62,6 +54,7 @@ const IssueState = props => {
         value={{
             issues: state.issues,
             filtered: state.filtered,
+            error:state.error,
             addIssue,
             deleteIssue,
             updateIssue,

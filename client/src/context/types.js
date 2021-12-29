@@ -2,6 +2,7 @@ export const ADD_ISSUE = 'ADD_ISSUE';
 export const DELETE_ISSUE ='DELETE_ISSUE';
 export const UPDATE_ISSUE ='UPDATE_ISSUE';
 export const FILTER_ISSUES = 'FILTER_ISSUES';
+export const ISSUE_ERROR = 'ISSUE_ERROR';
 export const CLEAR_FILTER = 'CLEAR_FILTER';
 export const SET_ALERT = 'SET_ALERT'; 
 export const REMOVE_ALERT = 'REMOVE_ALERT'; 

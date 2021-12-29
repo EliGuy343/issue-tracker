@@ -4,6 +4,7 @@ import {
     UPDATE_ISSUE,
     FILTER_ISSUES,
     CLEAR_FILTER,
+    ISSUE_ERROR,
 } from '../types'
 
 export default (state, action) => {
@@ -41,6 +42,11 @@ export default (state, action) => {
             return {
                 ...state,
                 filtered:null
+            }
+        case ISSUE_ERROR:
+            return {
+                ...state,
+                error: action.payload
             }
         default:
             return state; 
