@@ -2,7 +2,8 @@ import {
     ADD_FIX,
     DELETE_FIX,
     UPDATE_FIX,
-    FIX_ERROR
+    FIX_ERROR,
+    GET_FIXES
 } from '../types'
 
 export default (state, action) => {
@@ -28,6 +29,11 @@ export default (state, action) => {
             return {
                 ...state,
                 error:action.payload
+            };
+        case GET_FIXES:
+            return {
+                ...state,
+                fixes:action.payload
             };
         default:
             return state; 

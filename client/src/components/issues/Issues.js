@@ -26,8 +26,8 @@ const Issues = ({isAllIssues}) => {
     return (
         <Fragment>
 
-            {filtered !== null ? filtered.map(issue => (<IssueItem key={issue.id} issue={issue}  isAllIssues={isAllIssues} />)) : 
-            issues.map(issue => <IssueItem key={issue.id} issue={issue} isAllIssues={isAllIssues}/>)}
+            {filtered !== null ? filtered.map(issue => (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />)) : 
+            issues.map(issue => <IssueItem key={issue._id} issue={issue} isAllIssues={isAllIssues}/>)}
         </Fragment>
     )
 }

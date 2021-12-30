@@ -15,15 +15,15 @@ import {
 
 const FixState = props => {
     const initialState = {
-        fixes: {
-        }
+        fixes: {}
     }
 
     const getFixes = async () => {
        try {
             const res = await axios.get('/api/fixes');
             const newFixes = {} 
-            for(let i = 0; res.data.length; i++){
+            debugger; 
+            for(let i = 0;  i < res.data.length; i++){
                 newFixes[res.data[i].issue] = res.data[i]; 
             }
             dispatch({type:GET_FIXES,payload: newFixes});
