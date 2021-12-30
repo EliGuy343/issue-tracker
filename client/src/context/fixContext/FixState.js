@@ -8,22 +8,29 @@ import {
     ADD_FIX,
     DELETE_FIX,
     UPDATE_FIX,
-    FIX_ERROR
+    FIX_ERROR,
+    GET_FIXES
 } from '../types'
 
 
 const FixState = props => {
     const initialState = {
         fixes: {
-            '1': {
-                id:'25011890',
-                user:'618c0a5a607433ccb320892f',
-                userName:"Jack Dickson",
-                solution:"Rewrote authentication backend",
-                date:  Date(Date.now()).toString()
-            }
-            
         }
+    }
+
+    const getFixes = async () => {
+       try {
+            const res = await axios.get('/api/fixes');
+            const newFixes = {} 
+            for(let i = 0; res.data.length; i++){
+                newFixes[res.data[i].issue] = res.data[i]; 
+            }
+            dispatch({type:GET_FIXES,payload: newFixes});
+
+       } catch (error) {
+            dispatch({type:FIX_ERROR, payload:error.response.msg});    
+       }
     }
     const addFix = async (fix, issueId) => {
         
@@ -60,7 +67,8 @@ const FixState = props => {
             fixes: state.fixes,
             addFix,
             deleteFix,
-            updateFix
+            updateFix,
+            getFixes
         }}>
             {props.children}
         </fixContext.Provider>

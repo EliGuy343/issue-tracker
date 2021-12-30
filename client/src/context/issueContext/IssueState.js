@@ -10,7 +10,9 @@ import {
     UPDATE_ISSUE,
     FILTER_ISSUES,
     CLEAR_FILTER,
-    ISSUE_ERROR
+    ISSUE_ERROR,
+    GET_ISSUES,
+    CLEAR_ISSUES
 } from '../types'
 
 const IssueState = props => {
@@ -18,6 +20,24 @@ const IssueState = props => {
         issues : [],
         filtered:null,
         error:null
+    }
+
+    const getAllIssues = async () => {
+        try {
+            const res = await axios.get('/api/issues'); 
+            dispatch({type: GET_ISSUES, payload: res.data}); 
+        } catch (error) {
+            dispatch({type: ISSUE_ERROR, payload:error.response.msg}); 
+        }
+    }
+
+    const getUserIssues = async () => {
+        try {
+            const res = await axios.get('/api/issues/user'); 
+            dispatch({type: GET_ISSUES, payload: res.data}); 
+        } catch (error) {
+            dispatch({type: ISSUE_ERROR, payload:error.response.msg}); 
+        }
     }
 
     const addIssue = async issue => {
@@ -59,7 +79,9 @@ const IssueState = props => {
             deleteIssue,
             updateIssue,
             filterIssues,
-            clearFilter
+            clearFilter,
+            getAllIssues,
+            getUserIssues
         }}>
             {props.children}
         </issueContext.Provider>

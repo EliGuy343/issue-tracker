@@ -1,11 +1,23 @@
-import React, {Fragment, useContext} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import IssueItem from './IssueItem';
 import IssueContext from '../../context/issueContext/issueContext';
-
-
+import FixContext from '../../context/fixContext/fixContext';
 const Issues = ({isAllIssues}) => {
     const issueContext = useContext(IssueContext);
-    const {issues, filtered} = issueContext;
+    const {issues, filtered, getAllIssues, getUserIssues, loading} = issueContext;
+    const fixContext = useContext(FixContext); 
+    const {getFixes} = fixContext; 
+
+    useEffect(() => {
+        getFixes();
+        if(isAllIssues === true) {
+            getAllIssues();
+        } else {
+            getUserIssues(); 
+        }
+        
+    //eslint-disable-next-line
+    }, []);
     
     if(issues.length === 0){
         return <h4>No Issues found, lucky you...</h4>
