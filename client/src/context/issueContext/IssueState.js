@@ -12,17 +12,20 @@ import {
     CLEAR_FILTER,
     ISSUE_ERROR,
     GET_ISSUES,
-    CLEAR_ISSUES
+    CLEAR_ISSUES,
+    SET_LOADING
 } from '../types'
 
 const IssueState = props => {
     const initialState = {
         issues : [],
         filtered:null,
-        error:null
+        error:null,
+        loading:false
     }
 
     const getAllIssues = async () => {
+        dispatch({type:SET_LOADING, payload:null});
         try {
             const res = await axios.get('/api/issues'); 
             dispatch({type: GET_ISSUES, payload: res.data}); 
@@ -32,6 +35,7 @@ const IssueState = props => {
     }
 
     const getUserIssues = async () => {
+        dispatch({type:SET_LOADING, payload:null});
         try {
             const res = await axios.get('/api/issues/user'); 
             dispatch({type: GET_ISSUES, payload: res.data}); 
@@ -75,6 +79,7 @@ const IssueState = props => {
             issues: state.issues,
             filtered: state.filtered,
             error:state.error,
+            loading:state.loading,
             addIssue,
             deleteIssue,
             updateIssue,

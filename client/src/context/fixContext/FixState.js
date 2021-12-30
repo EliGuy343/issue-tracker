@@ -9,17 +9,21 @@ import {
     DELETE_FIX,
     UPDATE_FIX,
     FIX_ERROR,
-    GET_FIXES
+    GET_FIXES,
+    SET_LOADING
 } from '../types'
 
 
 const FixState = props => {
     const initialState = {
-        fixes: {}
+        fixes: {},
+        loading:false
     }
 
     const getFixes = async () => {
+        dispatch({type:SET_LOADING, payload:null});
        try {
+            
             const res = await axios.get('/api/fixes');
             const newFixes = {} 
             debugger; 
@@ -68,7 +72,8 @@ const FixState = props => {
             addFix,
             deleteFix,
             updateFix,
-            getFixes
+            getFixes,
+            loading: state.loading
         }}>
             {props.children}
         </fixContext.Provider>

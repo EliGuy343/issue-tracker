@@ -2,6 +2,7 @@ import React, {Fragment, useContext, useEffect} from 'react';
 import IssueItem from './IssueItem';
 import IssueContext from '../../context/issueContext/issueContext';
 import FixContext from '../../context/fixContext/fixContext';
+import Spinner from '../layout/Spinner';
 const Issues = ({isAllIssues}) => {
     const issueContext = useContext(IssueContext);
     const {issues, filtered, getAllIssues, getUserIssues, loading} = issueContext;
@@ -25,9 +26,8 @@ const Issues = ({isAllIssues}) => {
  
     return (
         <Fragment>
-
-            {filtered !== null ? filtered.map(issue => (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />)) : 
-            issues.map(issue => <IssueItem key={issue._id} issue={issue} isAllIssues={isAllIssues}/>)}
+            {issues !== null && (!issueContext.loading && !fixContext.loading) ? (filtered !== null ? filtered.map(issue => (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />)) : 
+            issues.map(issue => <IssueItem key={issue._id} issue={issue} isAllIssues={isAllIssues}/>)) : <Spinner/>}
         </Fragment>
     )
 }

@@ -6,7 +6,8 @@ import {
     CLEAR_FILTER,
     ISSUE_ERROR,
     GET_ISSUES,
-    CLEAR_ISSUES
+    CLEAR_ISSUES,
+    SET_LOADING
 } from '../types'
 
 export default (state, action) => {
@@ -59,7 +60,13 @@ export default (state, action) => {
         case ISSUE_ERROR:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading:false
+            }
+        case SET_LOADING:
+            return {
+                ...state, 
+                loading:true
             }
         default:
             return state; 
