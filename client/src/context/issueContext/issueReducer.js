@@ -68,6 +68,14 @@ export default (state, action) => {
                 ...state, 
                 loading:true
             }
+        case CLEAR_ISSUES:
+            return {
+                ...state,
+                issues:[],
+                filtered:null,
+                loading:false,
+                
+            }
         default:
             return state; 
     }

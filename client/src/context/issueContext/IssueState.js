@@ -71,6 +71,9 @@ const IssueState = props => {
     const clearFilter = () => {
         dispatch({type:CLEAR_FILTER});
     }
+    const clearIssues = () => {
+        dispatch({type:CLEAR_ISSUES});
+    }
     const [state, dispatch] = useReducer(issueReducer, initialState); 
 
     return (
@@ -86,7 +89,8 @@ const IssueState = props => {
             filterIssues,
             clearFilter,
             getAllIssues,
-            getUserIssues
+            getUserIssues,
+            clearIssues
         }}>
             {props.children}
         </issueContext.Provider>

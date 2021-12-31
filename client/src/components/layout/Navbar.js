@@ -2,16 +2,18 @@ import React,{Fragment, useContext} from 'react';
 import {AiFillBug} from 'react-icons/ai'; 
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authContext/authContext';
+import IssueContext from '../../context/issueContext/issueContext';
 import { useNavigate } from 'react-router-dom'
 
 
 const Navbar = () => {
     const authContext = useContext(AuthContext); 
     const {isAuthenticated, logout, user } = authContext; 
-    
+    const issueContext = useContext(IssueContext);
     const navigate = useNavigate();
     const onLogout = () => {
         logout();
+        issueContext.clearIssues();
         navigate('/');
     }
     

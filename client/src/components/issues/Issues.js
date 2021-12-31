@@ -20,7 +20,7 @@ const Issues = ({isAllIssues}) => {
     //eslint-disable-next-line
     }, []);
     
-    if(issues.length === 0){
+    if(issues.length === 0 && !issueContext.loading){
         return <h4>No Issues found, lucky you...</h4>
     }
  
