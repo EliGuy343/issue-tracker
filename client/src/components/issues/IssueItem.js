@@ -14,7 +14,7 @@ const IssueItem = ({issue, isAllIssues}) => {
     const [isSolutionOpen, setIsSolutionOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false); 
     const onDelete = () => {
-        deleteIssue(_id); 
+        deleteIssue(issue._id); 
     }
 
    // какого хуй блять???
