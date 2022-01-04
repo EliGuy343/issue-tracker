@@ -165,19 +165,20 @@ router.put('/:id',auth , async (req, res) => {
 router.delete('/:id',auth, async (req, res) => {
     try {
         let fix = await Fix.findById(req.params.id);
-
         if(!fix) {
-            return res.status(404).json({msg :'Fix not found'});
+            return res.status(404).json({msg:'Fix not found'});
         }
 
-        if(fix.user.toString() !== req.user.id && !req.user.admin) {
+        let issue = await Issue.findById(fix.issue);
+        
+        if(fix.user.toString() !== req.user.id && issue.user.toString() !== req.user.id  && !req.user.admin) {
             return res.status(401).json({msg: 'unauthorized Request'});
         }
 
         fix = await Fix.findByIdAndRemove(req.params.id);
 
 
-        res.json(issue);
+        res.json(fix);
 
          
     } catch (error) {

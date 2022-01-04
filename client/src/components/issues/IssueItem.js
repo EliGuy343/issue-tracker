@@ -6,15 +6,30 @@ import dateLogo from '../../icons/date.png';
 import SolutionWindow from '../Solution/SolutionWindow';
 import IssueEditWindow from '../issues/IssueEditWindow'; 
 import IssueContext from '../../context/issueContext/issueContext';
+import AuthContext from '../../context/authContext/authContext';
+import IssueState from '../../context/issueContext/IssueState';
+import FixContext from '../../context/fixContext/fixContext';
 const IssueItem = ({issue, isAllIssues}) => {
 
     const issueContext = useContext(IssueContext);
+    const authContext = useContext(AuthContext);
+    const fixContext = useContext(FixContext);
+
+     
     const { deleteIssue } = issueContext; 
     const {_id,userName, name, category, date}  = issue;
     const [isSolutionOpen, setIsSolutionOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false); 
     const onDelete = () => {
-        deleteIssue(issue._id); 
+        if(authContext.user._id === issue.user || authContext.user.admin) {
+            if(issue._id in fixContext.fixes) {
+                fixContext.deleteFix(issue._id); 
+            }    
+            deleteIssue(issue._id); 
+        }
+
+        
+        //TODO: Alert if user is not authorized 
     }
 
    // какого хуй блять???
