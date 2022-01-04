@@ -11,7 +11,6 @@ import {
 } from '../types'
 
 export default (state, action) => {
-
     switch(action.type) {
 
         case GET_ISSUES:
@@ -30,7 +29,7 @@ export default (state, action) => {
         case DELETE_ISSUE:
             return {
                 ...state, 
-                issues: state.issues.filter(issue => issue.id !== action.payload),
+                issues: state.issues.filter(issue => issue._id !== action.payload),
                 loading:false
             };
         case UPDATE_ISSUE:
