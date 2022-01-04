@@ -58,8 +58,20 @@ const IssueState = props => {
         }
     }
 
-    const deleteIssue = id => {
-        dispatch({type: DELETE_ISSUE, payload:id}); 
+    const deleteIssue = async id => {
+        try {
+            await axios.delete(`/api/issues/${id}`); 
+            dispatch({
+                type: DELETE_ISSUE,
+                payload:id
+            }); 
+
+        } catch (error) {
+            dispatch({
+                type:ISSUE_ERROR,
+                payload: error.response.msg
+            })
+        }
     }
     const updateIssue = issue => {
         dispatch({type:UPDATE_ISSUE, payload:issue}); 

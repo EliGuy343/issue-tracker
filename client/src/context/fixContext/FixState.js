@@ -54,8 +54,15 @@ const FixState = props => {
         }   
     }
 
-    const deleteFix = id => {
-        dispatch({type: DELETE_FIX, payload: id}); 
+    const deleteFix = async id => {
+        try {
+
+            await axios.delete(`/api/fixes/${state.fixes[id]._id}`);
+            dispatch({type: DELETE_FIX, payload: id}); 
+            
+        } catch (error) {
+            dispatch({type:FIX_ERROR, payload: error.response.msg});
+        }
     }
 
     const updateFix = (fix,issueId) => {
