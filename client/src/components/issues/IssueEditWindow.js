@@ -1,6 +1,7 @@
 import IssueContext from "../../context/issueContext/issueContext";
 import AuthContext from "../../context/authContext/authContext";
 import ReactDom from 'react-dom';
+import alertContext from "../../context/alertContext/alertContext";
 import React, {Fragment, useContext, useState} from 'react';
 
 const IssueEditWindow = ({open, issue, close}) => {
@@ -28,7 +29,7 @@ const IssueEditWindow = ({open, issue, close}) => {
 
     const issueContext = useContext(IssueContext); 
     const authContext = useContext(AuthContext);
-
+    
 
     const [editIssue, setEditIssue] = useState({
         id:issue._id, 

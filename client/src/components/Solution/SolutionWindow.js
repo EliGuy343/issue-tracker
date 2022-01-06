@@ -6,7 +6,7 @@ import engineerLogo from '../../icons/engineer.png';
 import dateLogo from '../../icons/date.png';
 import AuthContext from '../../context/authContext/authContext';
 import AlertContext from '../../context/alertContext/alertContext';
-
+import Alerts from "../layout/Alerts";
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
@@ -76,7 +76,7 @@ const SolutionWindow = ({open, close, issueId}) => {
         deleteFix(issueId); 
     }
     if(issueId in fixes) {
-        // id is needed later for when we make edits and update the database
+
         const {userName, solution, date} = fixes[issueId]; 
         
        
@@ -86,6 +86,7 @@ const SolutionWindow = ({open, close, issueId}) => {
                 <div style={OVERLAY_STYLES}/>
                 <div style={MODAL_STYLES}>
                     <div className ="card bg-light">  
+                    <Alerts/>
                         <h4 className="text-left">
                             <img src={handLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Solution: " + solution}{' '}
                         </h4>
@@ -114,10 +115,12 @@ const SolutionWindow = ({open, close, issueId}) => {
     }else {
 
     return ReactDom.createPortal(
+        
         <Fragment>
             <div style={OVERLAY_STYLES}/>
-            <div style={MODAL_STYLES}>    
+            <div style={MODAL_STYLES}> 
                 <div className="card bg-light">
+                <Alerts/>  
                     <h3>{"Add a solution"}</h3>
                     <form onSubmit={onSubmitForm}>
                     <input type="text" placeholder="Solution" name="solution" style={{"width":"100%"}} onChange={onChangeForm}></input>

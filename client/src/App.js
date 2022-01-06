@@ -31,7 +31,6 @@ const App = () => {
               <Authenticator/>
               <Navbar />
                 <div>
-                  <Alerts/>
                   <Routes>
                     <Route exact path='/' element={<Home/>}/>
                     <Route exact path='/about' element={<About/>}/>
@@ -41,12 +40,14 @@ const App = () => {
                     <Route exact path='/login' element={<Login/>}/>
                   </Routes>
                 </div>
+                <Alerts/>
             </Fragment>
             </Router>
           </AlertState>
         </IssueState>
       </FixState>
     </AuthState>
+    
   );
 }
 
