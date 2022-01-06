@@ -1,4 +1,5 @@
 import IssueContext from "../../context/issueContext/issueContext";
+import AuthContext from "../../context/authContext/authContext";
 import ReactDom from 'react-dom';
 import React, {Fragment, useContext, useState} from 'react';
 
@@ -26,10 +27,11 @@ const IssueEditWindow = ({open, issue, close}) => {
     }
 
     const issueContext = useContext(IssueContext); 
+    const authContext = useContext(AuthContext);
 
 
     const [editIssue, setEditIssue] = useState({
-        id:issue.id, 
+        id:issue._id, 
         name:issue.name,
         userName:issue.userName,
         category:issue.category,
@@ -41,7 +43,11 @@ const IssueEditWindow = ({open, issue, close}) => {
     const onChange = e => setEditIssue({...editIssue, [e.target.name]: e.target.value});
     const onSubmit = e => {
         e.preventDefault(); 
-        issueContext.updateIssue(editIssue);
+        if(authContext.user._id === issue.user || authContext.user.admin) {
+            issueContext.updateIssue(editIssue);
+
+        }
+        
         close();  
     }
 

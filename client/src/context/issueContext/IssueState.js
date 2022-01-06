@@ -73,8 +73,21 @@ const IssueState = props => {
             })
         }
     }
-    const updateIssue = issue => {
-        dispatch({type:UPDATE_ISSUE, payload:issue}); 
+    const updateIssue = async issue => {
+        const config = {
+            headers: {
+                'Content-type':'application/json'
+            }
+        };
+        try {
+            debugger;
+            const res = await axios.put(`/api/issues/${issue.id}`, issue, config);
+            debugger;
+            dispatch({type:UPDATE_ISSUE, payload:res.data});
+        } catch (error) {
+            dispatch({type:ISSUE_ERROR, payload:error.response.msg });
+        }
+         
     }
 
     const filterIssues = text => {

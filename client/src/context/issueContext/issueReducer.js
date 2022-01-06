@@ -35,7 +35,7 @@ export default (state, action) => {
         case UPDATE_ISSUE:
             return {
                 ...state, 
-                issues: state.issues.map(issue => issue.id === action.payload.id ? action.payload : issue),
+                issues: state.issues.map(issue => issue._id === action.payload._id ? action.payload : issue),
                 loading:false
             };
         case FILTER_ISSUES:
