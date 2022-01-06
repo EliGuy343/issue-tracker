@@ -64,9 +64,12 @@ const SolutionWindow = ({open, close, issueId}) => {
         if(fix.solution === '') {
             setAlert("Solution can't be empty",'danger'); 
         } else {
-            updateFix({user:user._id, userName:user.name, solution:fix.solution}, issueId);
-            setFix({ solution:""});
-            close();
+            if(user._id === authcontext.user._id || authcontext.user.admin) {
+                
+                updateFix({user:user._id, userName:user.name, solution:fix.solution,id:fixes[issueId]._id}, issueId);
+                setFix({ solution:""});
+                close();
+            } 
         } 
     }
     const onDelete = () => {
@@ -74,7 +77,7 @@ const SolutionWindow = ({open, close, issueId}) => {
     }
     if(issueId in fixes) {
         // id is needed later for when we make edits and update the database
-        const {id,userName, solution, date} = fixes[issueId]; 
+        const {userName, solution, date} = fixes[issueId]; 
         
        
 

@@ -65,11 +65,22 @@ const FixState = props => {
         }
     }
 
-    const updateFix = (fix,issueId) => {
-        fix.id = uuidv4(); 
-        fix.date = Date(Date.now()).toString(); 
-        const updatedFix = [issueId,fix]; 
-        dispatch({type:UPDATE_FIX, payload: updatedFix}); 
+    const updateFix = async (fix,issueId) => {
+        const config = {
+            headers: {
+                'Content-type':'application/json'
+            }
+        };
+        try {   
+            const res = await axios.put(`/api/fixes/${fix.id}`,{issue:issueId, solution:fix.solution}, config);
+            const updatedFix = [issueId,fix]; 
+            dispatch({type:UPDATE_FIX, payload: updatedFix}); 
+
+        }
+        catch (error) {
+            dispatch({type:FIX_ERROR, payload: error.response.msg});
+            debugger;
+        }   
     }
     const [state, dispatch] = useReducer(fixReducer, initialState);
 
