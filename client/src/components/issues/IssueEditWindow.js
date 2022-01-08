@@ -1,10 +1,14 @@
 import IssueContext from "../../context/issueContext/issueContext";
 import AuthContext from "../../context/authContext/authContext";
 import ReactDom from 'react-dom';
-import alertContext from "../../context/alertContext/alertContext";
+import AlertContext from "../../context/alertContext/alertContext";
 import React, {Fragment, useContext, useState} from 'react';
+import WindowAlerts from "../layout/WindowAlerts";
 
 const IssueEditWindow = ({open, issue, close}) => {
+
+    const alertContext = useContext(AlertContext);
+    const {setWindowAlert} = alertContext;
 
     const MODAL_STYLES = {
         position:'fixed',
@@ -44,12 +48,16 @@ const IssueEditWindow = ({open, issue, close}) => {
     const onChange = e => setEditIssue({...editIssue, [e.target.name]: e.target.value});
     const onSubmit = e => {
         e.preventDefault(); 
+        debugger;
         if(authContext.user._id === issue.user || authContext.user.admin) {
             issueContext.updateIssue(editIssue);
+            close();  
 
         }
+        else {
+            setWindowAlert("You're not authorized to make changes to this issue", "danger");
+        }
         
-        close();  
     }
 
     if(open === false) {
@@ -61,8 +69,8 @@ const IssueEditWindow = ({open, issue, close}) => {
         <Fragment>
             <div style={OVERLAY_STYLES}/>
             <div style={MODAL_STYLES}>
-            
                 <div className ="card bg-light">
+                    <WindowAlerts/>
                     <form onSubmit={onSubmit}>  
                         <h2 className="text-primary">Edit Issue:</h2>
                         <input type="text" placeholder="name" name="name" value={editIssue.name} onChange={onChange} />
