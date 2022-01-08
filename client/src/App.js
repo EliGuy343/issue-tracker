@@ -30,6 +30,7 @@ const App = () => {
             <Fragment>
               <Authenticator/>
               <Navbar />
+              <Alerts/>
                 <div>
                   <Routes>
                     <Route exact path='/' element={<Home/>}/>
@@ -39,8 +40,7 @@ const App = () => {
                     <Route exact path='/register' element={<Register/>}/>
                     <Route exact path='/login' element={<Login/>}/>
                   </Routes>
-                </div>
-                <Alerts/>
+                </div> 
             </Fragment>
             </Router>
           </AlertState>

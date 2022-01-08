@@ -6,7 +6,8 @@ import engineerLogo from '../../icons/engineer.png';
 import dateLogo from '../../icons/date.png';
 import AuthContext from '../../context/authContext/authContext';
 import AlertContext from '../../context/alertContext/alertContext';
-import Alerts from "../layout/Alerts";
+import WindowAlerts from "../layout/WindowAlerts";
+import { set } from 'mongoose';
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 
@@ -14,7 +15,7 @@ const SolutionWindow = ({open, close, issueId}) => {
     const authcontext = useContext(AuthContext);
     const {user} = authcontext; 
     const alertContext = useContext(AlertContext); 
-    const {setAlert} = alertContext;
+    const {setWindowAlert} = alertContext;
     const [fix, setFix] = useState({solution:""})
    
     const MODAL_STYLES = {
@@ -51,7 +52,7 @@ const SolutionWindow = ({open, close, issueId}) => {
 
         e.preventDefault();
         if(fix.solution === '') {
-            setAlert("Solution can't be empty",'danger'); 
+            setWindowAlert("Solution can't be empty",'danger'); 
         } else {
             fixContext.addFix({user:user._id, userName:user.name, solution:fix.solution}, issueId);
             setFix({solution:""});
@@ -62,14 +63,17 @@ const SolutionWindow = ({open, close, issueId}) => {
     const onSubmitUpdateForm = e => {
         e.preventDefault();
         if(fix.solution === '') {
-            setAlert("Solution can't be empty",'danger'); 
+            setWindowAlert("Solution can't be empty",'danger'); 
         } else {
-            if(user._id === authcontext.user._id || authcontext.user.admin) {
+            debugger;
+            if(fixes[issueId].user === authcontext.user._id || authcontext.user.admin) {
                 
                 updateFix({user:user._id, userName:user.name, solution:fix.solution,id:fixes[issueId]._id}, issueId);
                 setFix({ solution:""});
                 close();
-            } 
+            }  else {
+                setWindowAlert("You're not authorized to make changes to this solution", "danger"); 
+            }
         } 
     }
     const onDelete = () => {
@@ -86,7 +90,7 @@ const SolutionWindow = ({open, close, issueId}) => {
                 <div style={OVERLAY_STYLES}/>
                 <div style={MODAL_STYLES}>
                     <div className ="card bg-light">  
-                    <Alerts/>
+                    <WindowAlerts/>
                         <h4 className="text-left">
                             <img src={handLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Solution: " + solution}{' '}
                         </h4>
@@ -120,7 +124,7 @@ const SolutionWindow = ({open, close, issueId}) => {
             <div style={OVERLAY_STYLES}/>
             <div style={MODAL_STYLES}> 
                 <div className="card bg-light">
-                <Alerts/>  
+                <WindowAlerts/>  
                     <h3>{"Add a solution"}</h3>
                     <form onSubmit={onSubmitForm}>
                     <input type="text" placeholder="Solution" name="solution" style={{"width":"100%"}} onChange={onChangeForm}></input>

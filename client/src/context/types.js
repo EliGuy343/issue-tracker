@@ -25,3 +25,5 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'; 
+export const SET_WINDOW_ALERT ='SET_WINDOW_ALERT';
+export const REMOVE_WINDOW_ALERT ='REMOVE_WINDOW_ALERT';
