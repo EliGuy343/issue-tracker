@@ -3,11 +3,11 @@ import issueLogo from '../../icons/issue.png';
 import engineerLogo from '../../icons/engineer.png';
 import categoryLogo from '../../icons/category.png';
 import dateLogo from '../../icons/date.png';
+import clockLogo from '../../icons/clock.png'
 import SolutionWindow from '../Solution/SolutionWindow';
 import IssueEditWindow from '../issues/IssueEditWindow'; 
 import IssueContext from '../../context/issueContext/issueContext';
 import AuthContext from '../../context/authContext/authContext';
-import IssueState from '../../context/issueContext/IssueState';
 import FixContext from '../../context/fixContext/fixContext';
 const IssueItem = ({issue, isAllIssues}) => {
 
@@ -18,6 +18,8 @@ const IssueItem = ({issue, isAllIssues}) => {
      
     const { deleteIssue } = issueContext; 
     const {_id,userName, name, category, date}  = issue;
+    const newDate = date.split("T")[0];
+    const time = date.split("T")[1].split(".")[0];  
     const [isSolutionOpen, setIsSolutionOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false); 
     const onDelete = () => {
@@ -49,7 +51,10 @@ const IssueItem = ({issue, isAllIssues}) => {
             <img src={categoryLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Category: " + category}{' '}
             </h4>
             <h4 className="text-left">
-            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Submission Date: " + date}{' '}
+            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Submission Date: " + newDate}{' '}
+            </h4>
+            <h4 className="text-left">
+            <img src={clockLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Time: " + time}{' '}
             </h4>
             <div style={{"marginTop":"12px"}}>
                 <button className="btn btn-dark btn-sm" style={{"marginRight":"16px"}} onClick={() => setIsEditOpen(true)}>Edit</button>
