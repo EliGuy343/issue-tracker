@@ -25,11 +25,20 @@ const Issues = ({isAllIssues}) => {
     }
  
     return (
-        <Fragment>
+        <div style={isAllIssues === true ? allIssuesStyle: null}>
             {issues !== null && (!issueContext.loading && !fixContext.loading) ? (filtered !== null ? filtered.map(issue => (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />)) : 
             issues.map(issue => <IssueItem key={issue._id} issue={issue} isAllIssues={isAllIssues}/>)) : <Spinner/>}
-        </Fragment>
+        </div>
     )
 }
 
+
+const allIssuesStyle = {
+    display: 'grid',
+    gridTemplateColumns:'repeat(3,1fr)',
+    gridGap:'1rem'
+};
+
+
 export default Issues;
+
