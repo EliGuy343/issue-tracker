@@ -4,6 +4,7 @@ import FixContext from '../../context/fixContext/fixContext';
 import handLogo from '../../icons/hand.png';
 import engineerLogo from '../../icons/engineer.png';
 import dateLogo from '../../icons/date.png';
+import clockLogo from '../../icons/clock.png'
 import AuthContext from '../../context/authContext/authContext';
 import AlertContext from '../../context/alertContext/alertContext';
 import WindowAlerts from "../layout/WindowAlerts";
@@ -82,7 +83,8 @@ const SolutionWindow = ({open, close, issueId}) => {
     if(issueId in fixes) {
 
         const {userName, solution, date} = fixes[issueId]; 
-        
+        const newDate = date.split("T")[0];
+        const time = date.split("T")[1].split(".")[0]; 
        
 
         return ReactDom.createPortal(
@@ -98,7 +100,10 @@ const SolutionWindow = ({open, close, issueId}) => {
                             <img src={engineerLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} /> {"Submitted By: " + userName}{' '}
                         </h4>
                         <h4 className="text-left">
-                            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Submission Date: " + date}{' '}
+                            <img src={dateLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Submission Date: " + newDate}{' '}
+                        </h4>
+                        <h4 className="text-left">
+                            <img src={clockLogo} alt="Logo" style={{"width":"30px", "height":"30px", "marginTop":"6px"}} />  {"Time: " + time}{' '}
                         </h4>
                         <h3 style={{"marginTop":"15px"}} >Edit Solution:</h3>
                         <form onSubmit={onSubmitUpdateForm}>
