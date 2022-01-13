@@ -58,7 +58,6 @@ const IssueItem = ({issue, isAllIssues}) => {
             </h4>
             <div style={{"marginTop":"12px"}}>
                 <button className="btn btn-dark btn-sm" style={{"marginRight":"16px"}} onClick={() => setIsEditOpen(true)}>Edit</button>
-                <button className="btn btn-danger btn-sm" onClick={onDelete}>Delete</button>
             </div>
             <button className="btn btn-primary btn-sm" onClick={() => setIsSolutionOpen(true)} style={{"marginTop":"6px"}}>Add/View Solution</button>
 

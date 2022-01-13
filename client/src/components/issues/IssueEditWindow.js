@@ -4,7 +4,7 @@ import ReactDom from 'react-dom';
 import AlertContext from "../../context/alertContext/alertContext";
 import React, {Fragment, useContext, useState} from 'react';
 import WindowAlerts from "../layout/WindowAlerts";
-
+import FixContext from "../../context/fixContext/fixContext"
 const IssueEditWindow = ({open, issue, close}) => {
 
     const alertContext = useContext(AlertContext);
@@ -33,7 +33,7 @@ const IssueEditWindow = ({open, issue, close}) => {
 
     const issueContext = useContext(IssueContext); 
     const authContext = useContext(AuthContext);
-    
+    const fixContext = useContext(FixContext);
 
     const [editIssue, setEditIssue] = useState({
         id:issue._id, 
@@ -59,6 +59,21 @@ const IssueEditWindow = ({open, issue, close}) => {
         }
         
     }
+    const onDelete = () => {
+        if(authContext.user._id === issue.user || authContext.user.admin) {
+            if(issue._id in fixContext.fixes) {
+                fixContext.deleteFix(issue._id); 
+            }    
+            issueContext.deleteIssue(issue._id); 
+        }
+        else {
+            setWindowAlert("You're not authorized to delete this issue", "danger");
+        }
+
+        
+        //TODO: Alert if user is not authorized 
+    }
+
 
     if(open === false) {
 
@@ -77,7 +92,8 @@ const IssueEditWindow = ({open, issue, close}) => {
                         <input type="text" placeholder="category" name="category" value={editIssue.category} onChange={onChange} />
                         <input type="submit" value="Update issue" className="btn btn-primary btn-block"/>
                     </form>
-                <button className="btn btn-dark btn-sm" onClick={close} style={{"marginTop":"12px", "fontSize":"16px"}}>close</button>
+                    <button className="btn btn-danger btn-block" onClick={onDelete}>Delete</button>
+                    <button className="btn btn-dark btn-sm" onClick={close} style={{"marginTop":"12px", "fontSize":"16px"}}>close</button>
                 </div>
             </div>
            
