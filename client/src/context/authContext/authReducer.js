@@ -10,6 +10,7 @@ import {
 } from '../types'
 
 
+ // eslint-disable-next-line
 export default (state, action) => {
     switch(action.type) {
         case USER_LOADED:
@@ -46,6 +47,10 @@ export default (state, action) => {
             return {
                 ...state,
                 error:null
+            }
+        default:
+            return {
+                ...state
             }
     }
 }

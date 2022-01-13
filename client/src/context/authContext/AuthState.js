@@ -1,5 +1,4 @@
-import React, {useReducer} from 'react'
-import {v4 as uuidv4} from 'uuid';
+import React, {useReducer} from 'react';
 import authContext from './authContext';
 import authReducer from './authReducer';
 import axios from 'axios';

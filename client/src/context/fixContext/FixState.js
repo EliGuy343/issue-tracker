@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+
 import fixContext from './fixContext';
 import fixReducer from './fixReducer';
 import axios from 'axios';
@@ -72,7 +72,7 @@ const FixState = props => {
             }
         };
         try {   
-            const res = await axios.put(`/api/fixes/${fix.id}`,{issue:issueId, solution:fix.solution}, config);
+            await axios.put(`/api/fixes/${fix.id}`,{issue:issueId, solution:fix.solution}, config);
             const updatedFix = [issueId,fix]; 
             dispatch({type:UPDATE_FIX, payload: updatedFix}); 
 

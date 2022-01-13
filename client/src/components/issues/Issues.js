@@ -1,11 +1,11 @@
-import React, {Fragment, useContext, useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import IssueItem from './IssueItem';
 import IssueContext from '../../context/issueContext/issueContext';
 import FixContext from '../../context/fixContext/fixContext';
 import Spinner from '../layout/Spinner';
 const Issues = ({isAllIssues}) => {
     const issueContext = useContext(IssueContext);
-    const {issues, filtered, getAllIssues, getUserIssues, loading} = issueContext;
+    const {issues, filtered, getAllIssues, getUserIssues} = issueContext;
     const fixContext = useContext(FixContext); 
     const {getFixes} = fixContext; 
 

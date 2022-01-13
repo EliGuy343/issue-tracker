@@ -7,7 +7,7 @@ import dateLogo from '../../icons/date.png';
 import AuthContext from '../../context/authContext/authContext';
 import AlertContext from '../../context/alertContext/alertContext';
 import WindowAlerts from "../layout/WindowAlerts";
-import { set } from 'mongoose';
+
 const SolutionWindow = ({open, close, issueId}) => {
 
     const fixContext = useContext(FixContext); 

@@ -6,7 +6,7 @@ import {
     GET_FIXES,
     SET_LOADING
 } from '../types'
-
+ // eslint-disable-next-line
 export default (state, action) => {
 
     switch(action.type) {

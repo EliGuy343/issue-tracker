@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react'
-import AuthContext from '../../context/authContext/authContext'
+import React from 'react'
+
 
 
 const Home = () => {
