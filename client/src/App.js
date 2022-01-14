@@ -15,6 +15,7 @@ import Login from './components/auth/login';
 import Alerts from './components/layout/Alerts';
 import setAuthToken from './utils/setAuthToken';
 import Authenticator from './components/auth/Authenticator';
+import StatsticsPage from './components/pages/StatsticsPage';
 if (localStorage.token) {
   setAuthToken(localStorage.token); 
 }
@@ -33,6 +34,7 @@ const App = () => {
               <Alerts/>
                 <div>
                   <Routes>
+                  <Route exact  path='/statistics' element={<StatsticsPage/>}/>
                     <Route exact path='/' element={<Home/>}/>
                     <Route exact path='/about' element={<About/>}/>
                     <Route exact path='/myissues' element={<MyIssues/>}/>
