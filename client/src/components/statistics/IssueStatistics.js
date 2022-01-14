@@ -2,7 +2,7 @@ import React, { useEffect ,useContext } from 'react';
 import FixContext from '../../context/fixContext/fixContext';
 import IssueContext from '../../context/issueContext/issueContext';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { LineChart, Line, ResponsiveContainer } from 'recharts';
+import { LineChart, Line} from 'recharts';
 import Spinner from '../layout/Spinner';
 
 

@@ -37,6 +37,9 @@ const Navbar = () => {
             <li>
                 <Link to='/allissues'>All Issues</Link>
             </li>
+            <li>
+                <Link to='/statistics'>Issue statistics</Link>
+            </li>
         </Fragment>
     )
 
