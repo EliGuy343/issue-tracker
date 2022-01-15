@@ -42,7 +42,7 @@ const UserStatistics = () => {
             label
           >
           <Cell key={`cell-0`} value={issuesSubmitted} fill="#acf48b" />
-          <Cell key={`cell-1`} value={fixesSubmitted} fill="#fffc73" />
+          <Cell key={`cell-1`} value={fixesSubmitted} fill="#4192a9" />
           </Pie>
           <Tooltip />
           <Legend/>
