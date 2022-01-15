@@ -80,8 +80,10 @@ const IssueStatistics = () => {
         return (
             <div>
                 <label  style={{"marginLeft":"35px","fontSize":"20px"}}>Issues Amount By Cateogry:</label>   
+                <br></br>
+                <br></br>
                 <BarChart style={{"marginLeft":"175px", "marginBottom":"50px"}}
-                    width={1200}
+                    width={1270}
                     height={300}
                     data={dataCategory}
                     margin={{
@@ -102,9 +104,10 @@ const IssueStatistics = () => {
              
                 </BarChart>
                 <label style={{"marginTop":"50px","marginLeft":"35px","fontSize":"20px"}} >Issue Amount By Date:</label>
-       
+                <br></br>
+                <br></br>
                 <LineChart style={{"marginLeft":"175px"}}
-                    width={1200}
+                    width={1300}
                     height={250}
                     data={dataDate}
                     margin={{

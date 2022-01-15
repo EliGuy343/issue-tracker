@@ -35,9 +35,9 @@ const Issues = ({isAllIssues}) => {
                 <div className="card bg-light">
                     <h3>Filter Solved Issues</h3>
                     <input type="radio" name="" value={true}  checked={filterSolved === true} onChange={onChange}
-                    /> On{'  '}
+                    /> <label style={{"fontSize":"20px"}} >On{'  '}</label>
                     <input type="radio" name="" value={false} checked={filterSolved === false} onChange={onChange}
-                    /> Off{'  '}
+                    /> <label style={{"fontSize":"20px"}} >Off{'  '}</label>
             </div>
                 <div style={isAllIssues === true ? allIssuesStyle: null}>
                     {issues !== null && (!issueContext.loading && !fixContext.loading) ? (filtered !== null ? filtered.map(issue => ( issue._id in fixes ? null : (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />))) : 
@@ -54,9 +54,9 @@ const Issues = ({isAllIssues}) => {
                     <div className="card bg-light">
                         <h3>Filter Solved Issues</h3>
                         <input type="radio" name="" value={true}  checked={filterSolved === true} onChange={onChange}
-                        /> On{'  '}
+                        /> <label style={{"fontSize":"20px"}} >On{'  '}</label>
                         <input type="radio" name="" value={false} checked={filterSolved === false} onChange={onChange}
-                        /> Off{'  '}
+                        /> <label style={{"fontSize":"20px"}} >Off{'  '}</label>
                 </div>
                     <div style={isAllIssues === true ? allIssuesStyle: null}>
                         {issues !== null && (!issueContext.loading && !fixContext.loading) ? (filtered !== null ? filtered.map(issue => (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />)) : 
