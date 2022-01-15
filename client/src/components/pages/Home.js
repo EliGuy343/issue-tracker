@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import AuthContext from '../../context/authContext/authContext'
+import UserStatistics from '../statistics/UserStatistics';
 
 
 
@@ -12,6 +13,7 @@ const Home = () => {
           {user && 
             (<div>
               <h1 className="text-center">Your Contributions:</h1>
+              <UserStatistics/>
             </div>)
           }  
         </div>
