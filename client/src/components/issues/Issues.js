@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import IssueItem from './IssueItem';
 import IssueContext from '../../context/issueContext/issueContext';
 import FixContext from '../../context/fixContext/fixContext';
@@ -7,8 +7,13 @@ const Issues = ({isAllIssues}) => {
     const issueContext = useContext(IssueContext);
     const {issues, filtered, getAllIssues, getUserIssues} = issueContext;
     const fixContext = useContext(FixContext); 
-    const {getFixes} = fixContext; 
+    const {getFixes, fixes} = fixContext; 
+    const [filterSolved, isFilterSolved] = useState(false); 
 
+    const onChange = e => {
+        isFilterSolved(e.target.value === 'true');
+        debugger; 
+    }
     useEffect(() => {
         getFixes();
         if(isAllIssues === true) {
@@ -23,14 +28,45 @@ const Issues = ({isAllIssues}) => {
     if(issues.length === 0 && !issueContext.loading){
         return <h4>No Issues found, lucky you...</h4>
     }
- 
-    return (
-        <div style={isAllIssues === true ? allIssuesStyle: null}>
-            {issues !== null && (!issueContext.loading && !fixContext.loading) ? (filtered !== null ? filtered.map(issue => (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />)) : 
-            issues.map(issue => <IssueItem key={issue._id} issue={issue} isAllIssues={isAllIssues}/>)) : <Spinner/>}
-        </div>
-    )
-}
+    if(filterSolved === true ) {
+
+        return (
+            <div>
+                <div className="card bg-light">
+                    <h3>Filter Solved Issues</h3>
+                    <input type="radio" name="" value={true}  checked={filterSolved === true} onChange={onChange}
+                    /> On{'  '}
+                    <input type="radio" name="" value={false} checked={filterSolved === false} onChange={onChange}
+                    /> Off{'  '}
+            </div>
+                <div style={isAllIssues === true ? allIssuesStyle: null}>
+                    {issues !== null && (!issueContext.loading && !fixContext.loading) ? (filtered !== null ? filtered.map(issue => ( issue._id in fixes ? null : (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />))) : 
+                    issues.map(issue => ( issue._id in fixes? null : <IssueItem key={issue._id} issue={issue} isAllIssues={isAllIssues}/>))) : <Spinner/>}
+                </div>
+            </div>
+        )
+
+    }
+    else {
+        
+            return (
+                <div>
+                    <div className="card bg-light">
+                        <h3>Filter Solved Issues</h3>
+                        <input type="radio" name="" value={true}  checked={filterSolved === true} onChange={onChange}
+                        /> On{'  '}
+                        <input type="radio" name="" value={false} checked={filterSolved === false} onChange={onChange}
+                        /> Off{'  '}
+                </div>
+                    <div style={isAllIssues === true ? allIssuesStyle: null}>
+                        {issues !== null && (!issueContext.loading && !fixContext.loading) ? (filtered !== null ? filtered.map(issue => (<IssueItem key={issue._id} issue={issue}  isAllIssues={isAllIssues} />)) : 
+                        issues.map(issue => <IssueItem key={issue._id} issue={issue} isAllIssues={isAllIssues}/>)) : <Spinner/>}
+                    </div>
+                </div>
+            )
+        }
+
+    }
 
 
 const allIssuesStyle = {
