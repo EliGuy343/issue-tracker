@@ -48,7 +48,7 @@ const Issues = ({isAllIssues}) => {
 
     }
     else {
-        
+        console.log(issues.length)
             return (
                 <div>
                     <div className="card bg-light">
