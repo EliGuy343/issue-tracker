@@ -26,7 +26,6 @@ const FixState = props => {
             
             const res = await axios.get('/api/fixes');
             const newFixes = {} 
-            debugger; 
             for(let i = 0;  i < res.data.length; i++){
                 newFixes[res.data[i].issue] = res.data[i]; 
             }
@@ -35,6 +34,19 @@ const FixState = props => {
        } catch (error) {
             dispatch({type:FIX_ERROR, payload:error.response.msg});    
        }
+    }
+    const getUserFixes = async () => {
+        dispatch({type:SET_LOADING, payload:null});
+        try {
+            const res = await axios.get('/api/fixes/user');
+            const newFixes = {}
+            for(let i = 0;  i < res.data.length; i++) {
+                newFixes[res.data[i].issue] = res.data[i]; 
+            }
+            dispatch({type: GET_FIXES, payload:res.data}); 
+        } catch (error) {
+            dispatch({type:FIX_ERROR, payload:error.response.msg});       
+        }
     }
     const addFix = async (fix, issueId) => {
         
@@ -91,6 +103,7 @@ const FixState = props => {
             deleteFix,
             updateFix,
             getFixes,
+            getUserFixes,
             loading: state.loading
         }}>
             {props.children}
