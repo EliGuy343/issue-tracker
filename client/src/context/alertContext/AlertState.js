@@ -27,7 +27,7 @@ const AlertState = props => {
 
     }
 
-    const setWindowAlert = (msg, type, timeout = 5000) => {
+    const setWindowAlert = (msg, type, timeout = 2000) => {
         const id = uuidv4(); 
         dispatch({type:SET_WINDOW_ALERT, payload:{msg, type, id}});
        
