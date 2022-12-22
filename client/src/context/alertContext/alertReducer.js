@@ -2,7 +2,7 @@ import {
     SET_ALERT,
     REMOVE_ALERT,
     SET_WINDOW_ALERT,
-    REMOVE_WINDOW_ALERT 
+    REMOVE_WINDOW_ALERT
 } from "../types";
 
  // eslint-disable-next-line
@@ -17,7 +17,7 @@ export default (state, action) => {
         case SET_WINDOW_ALERT:
             return {
                 ...state,
-                windowAlerts:[...state.windowAlerts, action.payload]    
+                windowAlerts:[...state.windowAlerts, action.payload]
             };
         case REMOVE_ALERT:
 
@@ -31,7 +31,7 @@ export default (state, action) => {
                 windowAlerts:state.windowAlerts.filter(alert => alert.id !== action.payload)
             }
         default:
-            return state;  
+            return state;
 
         }
 }
