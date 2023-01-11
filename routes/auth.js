@@ -8,12 +8,6 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
-
-//@route GET  api/auth
-//@desc       login a user
-//@access     private
-
-
 router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -23,11 +17,6 @@ router.get('/', auth, async (req, res) => {
         res.send('Server Error');
     }
 })
-
-//@route POST api/auth
-//@desc       Auth user & get token
-//@access     public
-
 
 router.post('/',[
     check('email','Please include a valid email').isEmail(),
