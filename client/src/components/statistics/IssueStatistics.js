@@ -8,15 +8,14 @@ import Spinner from '../layout/Spinner';
 
 const IssueStatistics = () => {
     const fixContext = useContext(FixContext);
-    const issueContext = useContext(IssueContext); 
+    const issueContext = useContext(IssueContext);
     const {fixes, getFixes} = fixContext;
-    const {issues, getAllIssues } = issueContext; 
+    const {issues, getAllIssues } = issueContext;
     const dataCategory = [];
     const dataDate = [];
     useEffect(() => {
-        getFixes(); 
-        getAllIssues(); 
-    
+        getFixes();
+        getAllIssues();
     }, [])
 
     const categoryLookup = {}
@@ -30,56 +29,44 @@ const IssueStatistics = () => {
     if(issues.length > 0) {
 
             for(let i= 0; i < issues.length; i++) {
-        
                 if(!(issues[i].category in categoryLookup)) {
-                    categoryLookup[issues[i].category] = new Array(3).fill(0); 
+                    categoryLookup[issues[i].category] = new Array(3).fill(0);
                 }
-                categoryLookup[issues[i].category][0] +=1; 
+                categoryLookup[issues[i].category][0] +=1;
                 if(issues[i]._id in fixes ){
                     categoryLookup[issues[i].category][1] +=1;
                 } else  {
                     categoryLookup[issues[i].category][2] +=1;
                 }
-                
-                }
+            }
+            for(const [key, value] of Object.entries(categoryLookup)) {
+                dataCategory.push({
+                    "name": key,
+                    "total": value[0],
+                    "solved": value[1],
+                    "unsolved": value[2]
+                })
+            }
 
-                for(const [key, value] of Object.entries(categoryLookup)) {
-            
-                    dataCategory.push({
-                        "name": key,
-                        "total": value[0],
-                        "solved": value[1],
-                        "unsolved": value[2]
-                    })
-            
-                
+            for(let i= issues.length -1; i > 0; i--) {
+                if(!(issues[i].date.split("T")[0] in dateLookup)) {
+                    dateLookup[issues[i].date.split("T")[0]] = 1;
                 }
-
-                for(let i= issues.length -1; i > 0; i--) {
-        
-                    if(!(issues[i].date.split("T")[0] in dateLookup)) {
-                        dateLookup[issues[i].date.split("T")[0]] = 1; 
-                    }
-                    else{
-                        dateLookup[issues[i].date.split("T")[0]] +=1;
-                    }
-                    
+                else{
+                    dateLookup[issues[i].date.split("T")[0]] +=1;
                 }
+            }
 
                 for(const [key, value] of Object.entries(dateLookup)) {
-            
                     dataDate.push({
                         "name": key,
                         "amount": value,
                     })
-            
-                
                 }
-                
 
         return (
             <div>
-                <label  style={{"marginLeft":"35px","fontSize":"20px"}}>Issues Amount By Cateogry:</label>   
+                <label  style={{"marginLeft":"35px","fontSize":"20px"}}>Issues Amount By Cateogry:</label>
                 <br></br>
                 <br></br>
                 <BarChart style={{"marginLeft":"175px", "marginBottom":"50px"}}
@@ -101,7 +88,6 @@ const IssueStatistics = () => {
                     <Bar dataKey="solved" fill="#82ca9d" />
                     <Bar dataKey="unsolved" fill="#f53d3d" />
                     <br></br>
-             
                 </BarChart>
                 <label style={{"marginTop":"50px","marginLeft":"35px","fontSize":"20px"}} >Issue Amount By Date:</label>
                 <br></br>
@@ -122,11 +108,10 @@ const IssueStatistics = () => {
                     <YAxis  tickCount={3} />
                     <Tooltip />
                     <Line type="monotone" dataKey="amount" stroke="#8884d8" fill="#8884d8" />
-                </LineChart>   
+                </LineChart>
             </div>
-
         )
     }
 }
 
-export default IssueStatistics
+export default IssueStatistics;

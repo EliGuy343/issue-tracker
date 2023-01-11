@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import IssueContext from '../../context/issueContext/issueContext';
 const IssueFilter = () => {
-    
-    const issueContext = useContext(IssueContext); 
-    const {filterIssues, clearFilter, filtered} = issueContext; 
-    
+
+    const issueContext = useContext(IssueContext);
+    const {filterIssues, clearFilter, filtered} = issueContext;
     const text = useRef('');
 
     useEffect(() => {
@@ -15,13 +14,13 @@ const IssueFilter = () => {
 
     const onChange = e => {
         if(text.current.value !== '') {
-           filterIssues(e.target.value); 
+           filterIssues(e.target.value);
         }
         else {
-           clearFilter(); 
+           clearFilter();
         }
     }
-    
+
     return (
         <form>
             <input ref={text} type='text' placeholder='Filter Issues...' onChange={onChange} />

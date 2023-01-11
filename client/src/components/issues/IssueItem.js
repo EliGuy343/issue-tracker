@@ -5,17 +5,16 @@ import categoryLogo from '../../icons/category.png';
 import dateLogo from '../../icons/date.png';
 import clockLogo from '../../icons/clock.png'
 import SolutionWindow from '../Solution/SolutionWindow';
-import IssueEditWindow from '../issues/IssueEditWindow'; 
+import IssueEditWindow from '../issues/IssueEditWindow';
 
 const IssueItem = ({issue, isAllIssues}) => {
 
-   
     const {_id,userName, name, category, date}  = issue;
     const newDate = date.split("T")[0];
-    const time = date.split("T")[1].split(".")[0];  
+    const time = date.split("T")[1].split(".")[0];
     const [isSolutionOpen, setIsSolutionOpen] = useState(false);
-    const [isEditOpen, setIsEditOpen] = useState(false); 
-  
+    const [isEditOpen, setIsEditOpen] = useState(false);
+
     return (
         <div className ="card bg-light">
             <h4 className="text-left">

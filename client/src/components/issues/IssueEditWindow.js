@@ -28,65 +28,61 @@ const IssueEditWindow = ({open, issue, close}) => {
         right:0,
         bottom:0,
         background:'rgba(0, 0, 0, .7)',
-        zIndex: 1000 
+        zIndex: 1000
     }
 
-    const issueContext = useContext(IssueContext); 
+    const issueContext = useContext(IssueContext);
     const authContext = useContext(AuthContext);
     const fixContext = useContext(FixContext);
 
     const [editIssue, setEditIssue] = useState({
-        id:issue._id, 
+        id:issue._id,
         name:issue.name,
         userName:issue.userName,
         category:issue.category,
         date:issue.date
     }
 
-    ); 
+    );
 
     const onChange = e => setEditIssue({...editIssue, [e.target.name]: e.target.value});
     const onSubmit = e => {
-        e.preventDefault(); 
+        e.preventDefault();
         debugger;
         if(authContext.user._id === issue.user || authContext.user.admin) {
             issueContext.updateIssue(editIssue);
-            close();  
+            close();
 
         }
         else {
             setWindowAlert("You're not authorized to make changes to this issue", "danger");
         }
-        
+
     }
     const onDelete = () => {
         if(authContext.user._id === issue.user || authContext.user.admin) {
             if(issue._id in fixContext.fixes) {
-                fixContext.deleteFix(issue._id); 
-            }    
-            issueContext.deleteIssue(issue._id); 
+                fixContext.deleteFix(issue._id);
+            }
+            issueContext.deleteIssue(issue._id);
         }
         else {
             setWindowAlert("You're not authorized to delete this issue", "danger");
         }
-
-        
-        //TODO: Alert if user is not authorized 
     }
 
 
     if(open === false) {
-
         return null;
     }
-    
+
     return ReactDom.createPortal(
         <Fragment>
             <div style={OVERLAY_STYLES}/>
             <div style={MODAL_STYLES}>
                 <div className ="card bg-light">
                     <WindowAlerts/>
-                    <form onSubmit={onSubmit}>  
+                    <form onSubmit={onSubmit}>
                         <h2 className="text-primary">Edit Issue:</h2>
                         <input type="text" placeholder="name" name="name" value={editIssue.name} onChange={onChange} />
                         <input type="text" placeholder="category" name="category" value={editIssue.category} onChange={onChange} />
@@ -96,7 +92,6 @@ const IssueEditWindow = ({open, issue, close}) => {
                     <button className="btn btn-dark btn-sm" onClick={close} style={{"marginTop":"12px", "fontSize":"16px"}}>close</button>
                 </div>
             </div>
-           
         </Fragment>,
          document.getElementById('portal')
     )

@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 
 import issueContext from './issueContext';
 import issueReducer from './issueReducer';
-import axios from 'axios'; 
+import axios from 'axios';
 
 import {
     ADD_ISSUE,
@@ -27,20 +27,20 @@ const IssueState = props => {
     const getAllIssues = async () => {
         dispatch({type:SET_LOADING, payload:null});
         try {
-            const res = await axios.get('/api/issues'); 
-            dispatch({type: GET_ISSUES, payload: res.data}); 
+            const res = await axios.get('/api/issues');
+            dispatch({type: GET_ISSUES, payload: res.data});
         } catch (error) {
-            dispatch({type: ISSUE_ERROR, payload:error.response.msg}); 
+            dispatch({type: ISSUE_ERROR, payload:error.response.msg});
         }
     }
 
     const getUserIssues = async () => {
         dispatch({type:SET_LOADING, payload:null});
         try {
-            const res = await axios.get('/api/issues/user'); 
-            dispatch({type: GET_ISSUES, payload: res.data}); 
+            const res = await axios.get('/api/issues/user');
+            dispatch({type: GET_ISSUES, payload: res.data});
         } catch (error) {
-            dispatch({type: ISSUE_ERROR, payload:error.response.msg}); 
+            dispatch({type: ISSUE_ERROR, payload:error.response.msg});
         }
     }
 
@@ -60,11 +60,11 @@ const IssueState = props => {
 
     const deleteIssue = async id => {
         try {
-            await axios.delete(`/api/issues/${id}`); 
+            await axios.delete(`/api/issues/${id}`);
             dispatch({
                 type: DELETE_ISSUE,
                 payload:id
-            }); 
+            });
 
         } catch (error) {
             dispatch({
@@ -87,19 +87,18 @@ const IssueState = props => {
         } catch (error) {
             dispatch({type:ISSUE_ERROR, payload:error.response.msg });
         }
-         
     }
 
     const filterIssues = text => {
-        dispatch({type:FILTER_ISSUES, payload: text}); 
-    }; 
+        dispatch({type:FILTER_ISSUES, payload: text});
+    };
     const clearFilter = () => {
         dispatch({type:CLEAR_FILTER});
     }
     const clearIssues = () => {
         dispatch({type:CLEAR_ISSUES});
     }
-    const [state, dispatch] = useReducer(issueReducer, initialState); 
+    const [state, dispatch] = useReducer(issueReducer, initialState);
 
     return (
         <issueContext.Provider
@@ -122,5 +121,4 @@ const IssueState = props => {
     )
 }
 
-
-export default IssueState; 
+export default IssueState;

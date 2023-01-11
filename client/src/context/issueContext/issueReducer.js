@@ -28,13 +28,13 @@ export default (state, action) => {
             };
         case DELETE_ISSUE:
             return {
-                ...state, 
+                ...state,
                 issues: state.issues.filter(issue => issue._id !== action.payload),
                 loading:false
             };
         case UPDATE_ISSUE:
             return {
-                ...state, 
+                ...state,
                 issues: state.issues.map(issue => issue._id === action.payload._id ? action.payload : issue),
                 loading:false
             };
@@ -44,7 +44,7 @@ export default (state, action) => {
                 regexText = regexText.concat(" ");
             }
             return {
-                ...state, 
+                ...state,
                 filtered: state.issues.filter(issue => {
                     const regex = new RegExp(`${regexText}`, 'gi');
                     return issue.name.match(regex);
@@ -64,7 +64,7 @@ export default (state, action) => {
             }
         case SET_LOADING:
             return {
-                ...state, 
+                ...state,
                 loading:true
             }
         case CLEAR_ISSUES:
@@ -73,9 +73,8 @@ export default (state, action) => {
                 issues:[],
                 filtered:null,
                 loading:false,
-                
             }
         default:
-            return state; 
+            return state;
     }
 }

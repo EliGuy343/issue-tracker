@@ -5,24 +5,21 @@ import AlertContext from '../../context/alertContext/alertContext';
 const IssueForm = () => {
 
     const authcontext = useContext(AuthContext);
-    const {user} = authcontext; 
-    const issueContext = useContext(IssueContext); 
+    const {user} = authcontext;
+    const issueContext = useContext(IssueContext);
     const alertContext = useContext(AlertContext);
-    const {setAlert} = alertContext;  
-
+    const {setAlert} = alertContext;
     const [issue, setIssue] = useState({
         name:'',
         userName:'',
         category:'',
         date:''
-    }
-
-    ); 
+    });
 
     const onChange = e => setIssue({...issue, [e.target.name]: e.target.value});
 
     const onSubmit = e => {
-        e.preventDefault(); 
+        e.preventDefault();
         issue.userName = user.name;
         if(issue.name === '') {
             setAlert('Please enter the issue before submitting', 'danger');
@@ -33,7 +30,6 @@ const IssueForm = () => {
         }
         else {
             issueContext.addIssue(issue);
-            
             setIssue({
                 name:'',
                 userName:'',
