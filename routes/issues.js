@@ -1,17 +1,14 @@
-const express = require('express')
-const auth = require('../middleware/auth');
-const {check, validationResult } = require('express-validator');
+import express from "express"
+import auth from '../middleware/auth.js';
+import {check, validationResult } from 'express-validator';
 
-const User = require('../models/User');
-const Issue = require('../models/Issue');
-
-
-
+import User from '../models/User.js';
+import Issue from '../models/Issue.js';
 
 const router = express.Router();
 
 //@route      GET  api/issues
-//@desc       get all tracked issues 
+//@desc       get all tracked issues
 //@access     public
 
 router.get('/', async (req, res) => {
@@ -19,18 +16,12 @@ router.get('/', async (req, res) => {
 
         const issues = await Issue.find().sort({date: -1});
         res.json(issues);
-        
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Server Error"); 
+        res.status(500).send("Server Error");
     }
 
 })
-
-
-//@route      GET  api/issues
-//@desc       get all tracked issues for a specfic user
-//@access     public
 
 
 router.get('/user', auth ,async (req, res) => {
@@ -38,10 +29,10 @@ router.get('/user', auth ,async (req, res) => {
 
         const issues = await Issue.find({user: req.user.id}).sort({date: -1});
         res.json(issues);
-        
+
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Server Error"); 
+        res.status(500).send("Server Error");
     }
 
 })
@@ -156,4 +147,4 @@ router.delete('/:id',auth, async (req, res) => {
 
 })
     
-module.exports = router;
+export default router;

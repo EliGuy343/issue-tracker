@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const FixSchema = mongoose.Schema({
     user: {
@@ -18,11 +18,11 @@ const FixSchema = mongoose.Schema({
         required:true
     },
     date: {
-        type: Date, 
+        type: Date,
         defualt: Date.now
     },
-    
+
 })
 
 
-module.exports = mongoose.model('fix', FixSchema);
+export default mongoose.model('fix', FixSchema);

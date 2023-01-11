@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const IssueSchema = mongoose.Schema({
     user: {
@@ -19,10 +19,10 @@ const IssueSchema = mongoose.Schema({
         required:true
     },
     date: {
-        type: Date, 
+        type: Date,
         defualt: Date.now
     }
 })
 
 
-module.exports = mongoose.model('issue', IssueSchema);
+export default mongoose.model('issue', IssueSchema);

@@ -1,11 +1,12 @@
-const express = require('express');
-const {check ,validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
-const router = express.Router();
-const jwt = require('jsonwebtoken');
-const config = require('config');
+import express from 'express';
+import {check ,validationResult } from 'express-validator';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import config from 'config';
+import User from '../models/User.js';
 
-const User = require('../models/User');
+
+const router = express.Router();
 
 
 //@route POST api/users
@@ -133,4 +134,4 @@ router.post('/admin',[
 })
 
 
-module.exports = router;
+export default router;

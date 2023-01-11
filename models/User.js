@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 
 const UserSchema = mongoose.Schema({
     admin:{
@@ -20,11 +21,11 @@ const UserSchema = mongoose.Schema({
 
     },
     date: {
-        type: Date, 
+        type: Date,
         defualt: Date.now
     },
 
 })
 
 
-module.exports = mongoose.model('user', UserSchema);
+export default mongoose.model('user', UserSchema);

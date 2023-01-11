@@ -1,28 +1,32 @@
-const express = require('express');
-const connectDB = require('./config/db');
+import express, { json } from 'express';
+import connectDB from './config/db.js';
+import userRoute from './routes/users.js'
+import authRoute from './routes/auth.js'
+import issuesRoute from './routes/issues.js'
+import fixesRoute from './routes/fixes.js'
 
 
-const path = require('path');
+import { resolve } from 'path';
 const app = express();
 
 
 
 connectDB();
-app.use(express.json({extended: false}));
+app.use(json({extended: false}));
 
 
 const PORT = process.env.PORT || 5000;
 
-app.use('/api/users', require('./routes/users'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/issues', require('./routes/issues'));
-app.use('/api/fixes', require('./routes/fixes'));
+app.use('/api/users', userRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/issues', issuesRoute);
+app.use('/api/fixes', fixesRoute);
 
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 
-    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')))
+    app.get('*', (req, res) => res.sendFile(resolve(__dirname, 'client', 'build', 'index.html')))
 }
 
 
