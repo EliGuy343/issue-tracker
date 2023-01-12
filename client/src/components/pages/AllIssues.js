@@ -5,9 +5,9 @@ import AuthContext from '../../context/authContext/authContext';
 import { useNavigate } from 'react-router-dom';
 
 const AllIssues = () => {
-    const authContext = useContext(AuthContext);
+    const authContext = useContext(AuthContext); 
     const {isAuthenticated} = authContext
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         if(isAuthenticated === null) {
@@ -18,7 +18,7 @@ const AllIssues = () => {
 
     return (
         <div>
-              {/* <IssueFilter/> */}
+              <IssueFilter/>
               <Issues isAllIssues={true}/>
         </div>
     )

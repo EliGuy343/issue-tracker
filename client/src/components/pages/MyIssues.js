@@ -6,14 +6,14 @@ import AuthContext from '../../context/authContext/authContext'
 import { useNavigate } from 'react-router-dom'
 
 const MyIssues = () => {
-    const authContext = useContext(AuthContext);
+    const authContext = useContext(AuthContext); 
     const {isAuthenticated} = authContext
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
 
 
     useEffect(() => {
         if(isAuthenticated === null) {
-            navigate('/');
+            navigate('/'); 
         } 
  // eslint-disable-next-line
     },[isAuthenticated])
@@ -25,7 +25,7 @@ const MyIssues = () => {
                 <IssueForm/>
             </div>
             <div>
-                {/* <IssueFilter/> */}
+                <IssueFilter/>
                 <Issues isAllIssues={false}/>
             </div>
 
