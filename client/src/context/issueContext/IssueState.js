@@ -21,7 +21,9 @@ const IssueState = props => {
         issues : [],
         filtered:null,
         error:null,
-        loading:false
+        loading:false,
+        limit: 6,
+        moreToload: true
     }
 
     const getAllIssues = async () => {

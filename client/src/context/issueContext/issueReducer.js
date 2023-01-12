@@ -16,15 +16,18 @@ export default (state, action) => {
         case GET_ISSUES:
             return {
                 ...state,
+                moreToload: state.issues.length < action.payload.length ? true : false,
+                limit: state.issues.length < action.payload.length ? state.limit*2 : state.limit,
                 issues:action.payload,
-                loading:false
+                loading:false,
             };
 
         case ADD_ISSUE:
             return {
                 ...state,
                 issues:[...state.issues, action.payload],
-                loading:false
+                loading:false,
+                limit: state.limit + 1
             };
         case DELETE_ISSUE:
             return {
