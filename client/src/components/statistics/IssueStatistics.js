@@ -65,18 +65,30 @@ const IssueStatistics = () => {
                 }
 
         return (
-            <div>
-                <label  style={{"marginLeft":"35px","fontSize":"20px"}}>Issues Amount By Cateogry:</label>
-                <br></br>
-                <br></br>
-                <BarChart style={{"marginLeft":"175px", "marginBottom":"50px"}}
-                    width={1270}
+            <div
+                style={{
+                    display:"flex",
+                    flexDirection:"column",
+                    justifyContent:"center",
+                    alignItems:"center",
+                    gap:'5px'
+                }}
+            >
+                <h2
+                    style={{
+                        fontWeight:"bold"
+                    }}
+                >
+                    Issue Amount By Cateogry
+                </h2>
+                <BarChart
+                    width={1300}
                     height={300}
                     data={dataCategory}
                     margin={{
-                        top: 15,
+                        top: 0,
                         right: 0,
-                        left: 25,
+                        left: 0,
                         bottom: 0,
                     }}
                     >
@@ -89,16 +101,20 @@ const IssueStatistics = () => {
                     <Bar dataKey="unsolved" fill="#f53d3d" />
                     <br></br>
                 </BarChart>
-                <label style={{"marginTop":"50px","marginLeft":"35px","fontSize":"20px"}} >Issue Amount By Date:</label>
-                <br></br>
-                <br></br>
-                <LineChart style={{"marginLeft":"175px"}}
+                <h2
+                    style={{
+                        fontWeight:"bold"
+                    }}
+                >
+                    Issue Amount By Date
+                </h2>
+                <LineChart
                     width={1300}
                     height={250}
                     data={dataDate}
                     margin={{
-                    top: 10,
-                    right: 30,
+                    top: 0,
+                    right: 0,
                     left: 0,
                     bottom: 0,
                     }}
