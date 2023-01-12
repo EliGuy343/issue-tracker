@@ -1,5 +1,4 @@
-import express from 'express';
-import {check ,validationResult } from 'express-validator';
+import {validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import config from 'config';

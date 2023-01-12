@@ -1,6 +1,4 @@
-import express from "express"
-import auth from '../middleware/auth.js';
-import {check, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import Issue from '../models/Issue.js';
 
 export const getIssues = async (req, res) => {

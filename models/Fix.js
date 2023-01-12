@@ -24,5 +24,4 @@ const FixSchema = mongoose.Schema({
 
 })
 
-
 export default mongoose.model('fix', FixSchema);
