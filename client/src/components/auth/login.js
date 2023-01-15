@@ -64,7 +64,7 @@ const Login = props => {
                     <label htmlFor='password'>Password</label>
                     <input type='password' name='password' value={password} onChange={onChange}/>
                 </div>
-                <input type="submit" value="login" clasname="btn btn-primary btn-block"/>
+                <input className='btn btn-primary' type="submit" value="login" clasname="btn btn-primary btn-block"/>
             </form>
 
             
