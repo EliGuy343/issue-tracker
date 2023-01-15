@@ -5,13 +5,14 @@ import authRoute from './routes/auth.js';
 import issuesRoute from './routes/issues.js';
 import fixesRoute from './routes/fixes.js';
 import { resolve } from 'path';
+import cors from 'cors';
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 connectDB();
 app.use(json({extended: false}));
-
+app.use(cors());
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/issues', issuesRoute);
